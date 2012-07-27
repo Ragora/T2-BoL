@@ -1,0 +1,11 @@
+[Survival]
+maxBots = 16;
+difficultyIncrement = 0.008;
+fastDifficultyIncrement = 0.09;
+startDifficulty = 0.004;
+enableGodbot = true;
+godBotFrequency = 5;
+hintsEnabled = true;
+hintTimeMS = 120000;
+allowSetup = true;
+setupTimeMS = 60000;

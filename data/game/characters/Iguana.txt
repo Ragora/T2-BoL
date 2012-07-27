@@ -1,0 +1,47 @@
+[Character]
+Name = "Iguana";
+Race = "Draakan";
+Sex = "A";
+Skin = "Gecko";
+Voice = "Derm3";
+VoicePitch = 1;
+
+"Death"
+{
+Ahhh!
+}
+
+"Kill"
+{
+Hostile down.
+}
+
+"Defend"
+{
+Watch out!
+Be careful.
+}
+
+"Defended"
+{
+Thanks.
+I didn't see that guy!
+}
+
+"Healed"
+{
+Thank you.
+}
+
+"Idiocy"
+{
+Stop!
+}
+
+//Dunno if I'll actually use the capture Array on any character, but it's here.
+"Captured"
+{
+Hey...!
+Gr..
+}
+

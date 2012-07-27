@@ -1,0 +1,26 @@
+;Training Excersies File
+
+[Campaign]
+Mission1 = "TR_Basic";
+MissionText1 = "Basic Training";
+Mission2 = "TR_Combat";
+MissionText2 = "Combat Training";
+Mission3 = "TR_Sniping";
+MissionText3 = "Marksman Training";
+MissionCount = 3;
+Name = "Training Excercises";
+
+[Settings]
+Name = "Dolosus";
+TeamName = "Draakans";
+Race = "Draakan";
+Sex = "A";
+Voice = "Derm3";
+VoicePitch = 1;
+Skin = "Gecko";
+EnemySkin = "HALO_SKIN";
+EnemyName = "Criollos";
+PlayerTeam = 1;
+EnemyTeam = 2;
+StartLives = 3;
+EnemyRace = "Criollos";

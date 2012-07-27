@@ -1,0 +1,295 @@
+// MissionTypes = SinglePlayer
+// DisplayName = Recruit
+
+//--- MISSION BRIEFING BEGIN ---
+//I am Raptor, your trainer..
+//--- MISSION BRIEFING END ---
+
+// PlanetName = Xeron, 3960 CE
+// Bitmap = trn_5draconis
+
+//--- MISSION STRING BEGIN ---
+//<spush><font:Univers Condensed:18>OBJECTIVES:<spop>
+//<bitmap:bullet_2><lmargin:24>Bleck<lmargin:0>
+//--- MISSION STRING END ---
+
+//--- MISSION BLURB BEGIN ---
+//In the year 3060 CE, the first Alpha Viper training facility was built. It is now 900 years old on the day of your last training session before the war.
+//--- MISSION BLURB END ---
+
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+	cdTrack = "6";
+	powerCount = "0";
+	musicTrack = "desert";
+
+	new MissionArea(MissionArea) {
+		area = "-1024 -1024 2048 2048";
+		flightCeiling = "4000";
+		flightCeilingRange = "20";
+
+		locked = "true";
+	};
+	new SimGroup(Teams) {
+
+		powerCount = "0";
+
+		new SimGroup(Team1) {
+
+			powerCount = "0";
+
+			new SimGroup(spawnspheres) {
+
+				powerCount = "0";
+			};
+			new SimGroup(base0) {
+
+				new InteriorInstance() {
+					position = "415.795 109.654 111.4";
+					rotation = "0 0 1 139.229";
+					scale = "1 1 1";
+					interiorFile = "dbase_nefRaindance.dif";
+					showTerrainInside = "0";
+				};
+				new StaticShape() {
+					position = "452.967 135.507 98.3632";
+					rotation = "0 0 -1 40.107";
+					scale = "1 1 1";
+					nameTag = "Main";
+					dataBlock = "GeneratorLarge";
+					lockCount = "0";
+					homingCount = "0";
+
+					Target = "33";
+				};
+				new StaticShape() {
+					position = "441.541 148.661 98.3793";
+					rotation = "0 0 1 139.802";
+					scale = "1 1 1";
+					nameTag = "Main";
+					dataBlock = "GeneratorLarge";
+					lockCount = "0";
+					homingCount = "0";
+
+					Target = "34";
+				};
+				new StaticShape() {
+					position = "453.912 147.716 98.357";
+					rotation = "0 0 1 229.183";
+					scale = "1 1 1";
+					nameTag = "Main";
+					dataBlock = "GeneratorLarge";
+					lockCount = "0";
+					homingCount = "0";
+
+					Target = "35";
+				};
+				new StaticShape() {
+					position = "438.218 134.772 120.525";
+					rotation = "1 0 0 0";
+					scale = "1 1 1";
+					nameTag = "Main";
+					dataBlock = "SensorLargePulse";
+					lockCount = "0";
+					homingCount = "0";
+
+					Target = "36";
+				};
+			};
+			new SimGroup(dropPoints) {
+
+				new SimGroup(respawns) {
+
+					new Camera(RaptorSpawn) {
+						position = "428.742 126.147 99.5136";
+						rotation = "0 0 1 50.4203";
+						scale = "1 1 1";
+						dataBlock = "Observer";
+						lockCount = "0";
+						homingCount = "0";
+
+						team = "1";
+					};
+					new Camera(PlayerSpawn) {
+						position = "432.421 129.211 99.1953";
+						rotation = "0 0 1 50.9932";
+						scale = "1 1 1";
+						dataBlock = "Observer";
+						lockCount = "0";
+						homingCount = "0";
+
+						team = "0";
+					};
+					new Camera(Spawn01) {
+						position = "434.675 126.105 99.4532";
+						rotation = "0 0 1 48.7014";
+						scale = "1 1 1";
+						dataBlock = "Observer";
+						lockCount = "0";
+						homingCount = "0";
+
+						team = "0";
+					};
+					new Camera(Spawn02) {
+						position = "430.299 131.876 99.634";
+						rotation = "0 0 1 51.5662";
+						scale = "1 1 1";
+						dataBlock = "Observer";
+						lockCount = "0";
+						homingCount = "0";
+
+						team = "0";
+					};
+				};
+			};
+		};
+		new SimGroup(team0) {
+
+			powerCount = "0";
+		};
+		new Sun(Sun) {
+			position = "0 0 0";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			direction = "0.57735 0.57735 -0.57735";
+			color = "1.000000 1.000000 1.000000 1.000000";
+			ambient = "0.500000 0.500000 0.500000 1.000000";
+			texture[0] = "special/sunFlare";
+			texture[1] = "special/sunFlare02";
+			texture[2] = "special/LensFlare/flare01";
+			texture[3] = "special/LensFlare/flare02";
+			texture[4] = "special/LensFlare/flare03";
+			lensFlareScale = "0.7";
+			lensFlareIntensity = "1";
+			frontFlareSize = "300";
+			backFlareSize = "450";
+			flareColor = "1.000000 1.000000 1.000000 1.000000";
+
+			locked = "true";
+		};
+		new TerrainBlock(Terrain) {
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			detailTexture = "details/lavadet1";
+			terrainFile = "Training.ter";
+			squareSize = "8";
+			emptySquares = "217661 217676 86852 152390 87108 152646 218429 218444 232883 233139 364467 299189 364981 299702 234423";
+
+			position = "-1024 -1024 0";
+		};
+		new NavigationGraph(NavGraph) {
+			conjoinAngleDev = "50";
+			cullDensity = "0.3";
+			customArea = "0 0 0 0";
+
+			rotation = "0 0 0 0";
+			locked = "true";
+			scale = "1 1 1";
+			coverage = "0";
+			conjoinBowlDev = "20";
+			GraphFile = "Training.nav";
+			position = "0 0 0 1";
+		};
+		new SimGroup(ObserverDropPoints) {
+
+			powerCount = "0";
+
+			new Camera() {
+				position = "0 0 200";
+				rotation = "1 0 0 0";
+				scale = "1 1 1";
+				dataBlock = "Observer";
+				lockCount = "0";
+				homingCount = "0";
+
+				team = "0";
+				locked = "true";
+			};
+		};
+		new Sky(Sky) {
+			position = "692 -352 0";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			cloudHeightPer[0] = "0.349971";
+			cloudHeightPer[1] = "0.25";
+			cloudHeightPer[2] = "0.199973";
+			cloudSpeed1 = "0.0001";
+			cloudSpeed2 = "0.0002";
+			cloudSpeed3 = "0.0003";
+			visibleDistance = "550";
+			useSkyTextures = "1";
+			renderBottomTexture = "0";
+			SkySolidColor = "0.300000 0.100000 0.000000 0.800000";
+			fogDistance = "250";
+			fogColor = "0.300000 0.100000 0.000000 0.800000";
+			fogVolume1 = "100 0 85";
+			fogVolume2 = "600 85 270";
+			fogVolume3 = "0 0 0";
+			materialList = "sky_lava_starrynight.dml";
+			windVelocity = "1 0 0";
+			windEffectPrecipitation = "0";
+			fogVolumeColor1 = "128.000000 128.000000 128.000000 0.000000";
+			fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+			fogVolumeColor3 = "128.000000 128.000000 128.000000 0.000000";
+			high_visibleDistance = "-1";
+			high_fogDistance = "-1";
+			high_fogVolume1 = "-1 5.98911e+07 1.03256e-38";
+			high_fogVolume2 = "-1 4.39735e+21 1.1119e-16";
+			high_fogVolume3 = "-1 6.71258e+22 1.21749e+22";
+
+			locked = "true";
+		};
+	};
+	new SimGroup(RandomOrganics) {
+
+		new TSStatic() {
+			position = "352.297 188.881 160.856";
+			rotation = "0 0 1 136.364";
+			scale = "1 1 1";
+			shapeName = "dorg16.dts";
+		};
+		new TSStatic() {
+			position = "380.548 229.443 175.643";
+			rotation = "0 0 -1 1.71778";
+			scale = "1 1 1";
+			shapeName = "dorg17.dts";
+		};
+		new TSStatic() {
+			position = "333.627 257.188 177.605";
+			rotation = "1 0 0 0";
+			scale = "1 1 1";
+			shapeName = "dorg19.dts";
+		};
+		new TSStatic() {
+			position = "567.086 57.3387 137.477";
+			rotation = "0 0 1 141.521";
+			scale = "1 1 1";
+			shapeName = "dorg16.dts";
+		};
+		new TSStatic() {
+			position = "477.072 -72.6936 150.153";
+			rotation = "0 0 1 132.353";
+			scale = "1 1 1";
+			shapeName = "dorg19.dts";
+		};
+		new TSStatic() {
+			position = "488.239 8.63118 159.288";
+			rotation = "0 0 1 91.1003";
+			scale = "1 1 1";
+			shapeName = "dorg18.dts";
+		};
+		new TSStatic() {
+			position = "558.369 176.842 152.425";
+			rotation = "0 0 1 27.502";
+			scale = "1 1 1";
+			shapeName = "dorg16.dts";
+		};
+	};
+	new SimGroup(environment) {
+	};
+};
+//--- OBJECT WRITE END ---
+
+//Execute our mission script.
+exec("scripts/Training.cs");

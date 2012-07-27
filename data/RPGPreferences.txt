@@ -1,0 +1,7 @@
+[RPG]
+keepCorpses = true;
+maxCorpses = 6;
+
+[Server]
+SpaceServer = "192.168.1.5";
+EarthServer = "192.168.1.5";

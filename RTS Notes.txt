@@ -1,0 +1,46 @@
+If I can manage to make a 2D to 3D vector conversion on the RTS gameMode, this is what will happen:
+Don't bother reading this right now; it's my file to jot down ideas.
+
+Each race will have a trio of leaders each with their own special abilities and units.
+
+The Leaders, Abilities, and Units
+Dolosus (Draakan) -- Sterylization -- Pyromaniacs
+Alchaldes (Criollos) -- Research happens in half the time -- Do This
+Hammurabi (Criollos) --
+Beast (BioDerm) -- Buildings Construct in half the time, Units Train in half the time -- None
+Commander Jackson (Human) -- Bomber Strike -- Elite Drop Pods (Drops any sort of infantry anywhere on the map)
+Cynthia Fisher (Human) -- Poison Gas Strike (Any infantry caught in the radius will die slowly, lasts longer than Pyro Strike) --  
+Corperal Jones (Human) -- Units have more training (More training, same build time) -- 
+
+Each race will have a set of their own buildings (basically the same buildings for each, just different name and produces different units)
+
+The Buildings, Upgrades, and Units (Infantry)
+Cloning Center (Bioderm) -- None -- Bioderm Sniper (Light, Laser Rifle, Plasma Rifle, Grenade Launcher, Energy Pack), Bioderm Clone (Light Derm, Chaingun, Disc, Shocklance, Ammo), Bioderm Assault (Assault, Chaingun, Disc, Shocklance, Missile Launcher, Ammo), Bioderm Reaver (Juggie, Chaingun, Disc, Shocklance, Missile Launcher, Mortar)
+Barracks (Human) -- Adreniline (Infantry moves faster) -- 
+(Criollos)
+Egg Nurtering Center (Draakan) -- Growth Hormones (Draakans grow in half the time), -- Draakan (Once produced, their tiny and feeble -- after a minute or two, they'll grow to be full size & given armor) 
+
+The Buildings, Upgrades, and Units (Factory)
+Human -- 
+Bioderm --
+Draakan --
+Criollos --
+
+General Upgrades:
+Reflex Training (Units in vehicles will survive vehicle explosion with half health)
+
+General Pros and Cons of races:
+Draakan (Cons) -- Infantry takes a minute to mature, Infantry takes more damage than any other (they do not have as much fat & muscle to protect them),
+Draakan (Pros) -- All infantry can act as anti-infantry too (except Special units for Dolosus, their flame is better PERIOD),
+Human (Cons) -- Burns,
+Human (Pros) -- Can Train both Human & BioDerm Infantry (T2 fans better know the Humans created the Derms),
+Criollos (Cons) -- Infantry is slightly weaker than the rest,
+Criollos (Pros) -- Can Upgrade infantry with flame retardant armor, Can Train both Criollos and Draakan Units (They created the Drakes o_o),
+Bioderm (Cons) -- Burns, Tribal (Derms start with lowest Tech, but once upgraded, they can do major damage),
+Bioderm (Pros) -- ,
+
+Special Unit Upgrades
+Dolosus (Draakan, Pyromaniacs) -- Unstable Sacs (Lvl. 1, Pyromaniacs explode on Death, ignititing any nearby infantry), 
+
+
+ 

@@ -1,0 +1,62 @@
+<just:center><bitmap:cred_logo5><sbreak>
+<font:Univers:22>
+
+
+<spush><font:Univers condensed:22><spush>Tribes2\x99 is a registered trademark of Sierra Games and the original development team of Tribes2\x99 - Dynamix.<spop>
+
+<spush><font:Univers condensed:22><spush><color:18A27B>Scripters<spop><spop>
+<just:center>Dark Dragon DX (Vector) - Lead Developer
+<just:center>EmperorsChamp - His RPG Script helped insired this mod
+<just:center>UberGuy - Borrowed DSO Script
+
+
+<spush><font:Univers condensed:22><spush><color:18A27B>Modelers<spop><spop>
+Netmanx - Attempted to model Draakans
+UrbanAssault - Borrowed some interiors
+IronSphere - Borrowed shapes & interiors
+Low Poly Cooperative - Borrowed Camera & Pipe Model
+
+
+<spush><font:Univers condensed:22><spush><color:18A27B>Audio Mixers<spop><spop>
+Blnukem - Lead Music Mixer
+Josef Jahn - Borrowed TribesHymn (I plan on changing the song unless I can get a hold of this guy)
+
+
+<spush><font:Univers condensed:22><spush><color:18A27B>Artists<spop><spop>
+"Velo" - Provided Draakan concept sketch
+
+
+<spush><font:Univers condensed:22><spush><color:18A27B>Meta Testers<spop><spop>
+Castiger (Lyra)
+DeathBorn (Tigr0nix)
+Numbuh 178 (Tyler 178)
+Alviss (EmperorsChamp)
+Phantom139 (ShadowForce)
+
+
+<spush><font:Univers condensed:22><spush><color:18A27B>Original Roleplayers<spop><spop>
+evilhodag - Tribes 2
+StingWraith -  Tribes 2
+HelterSkelter - Tribes 2
+S-Guy - Tribes 2
+Numbuh 178 (Tyler 178) - GMOD
+DS=DragonStalker (Wraithz0r) - GMOD
+
+
+<spush><font:Univers condensed:22><spush><color:18A27B>General Support<spop><spop>
+Naosyth - Special Thanks for helping me get started on Torque scripting
+Zaxxman
+Mentulmhat
+DS=DragonStalker (Wraithz0r)
+DeadSoldier
+NiniN
+The-Construct.net - Community helped decide upon a name
+
+
+
+<spush><font:Univers condensed:22><spush>Sierra On-Line, Inc. owns the copyright to Tribes2. Dark Dragon DX (Vector), DEV Team, and any associates claim the copyright to this Modification (the \"mod\"), and any derivative works of this mod. By using this mod you must agree with the end user license agreement (\"EULA.txt\").<spop>
+
+<spush><font:Univers condensed:22><spush>The events, persons, and entities contained in this mod and it's game are purely fictional. Any similarities to any real events, persons, and entities are purely coinidental.<spop>
+
+
+<just:center><bitmap:draakan_full><sbreak>

@@ -1,0 +1,7 @@
+;Shrike
+
+[Vehicle]
+Name = "Shrike";
+Datablock = "ScoutFlyer";
+Price = 5000;
+SellPrice = 10000;

@@ -1,0 +1,22 @@
+;Birth of Legend Campaign file
+
+[Campaign]
+Mission1 = "Deployment";
+MissionText1 = "Mission 1 - Deployment";
+MissionCount = 1;
+Name = "The Draakan Story - Opposing Force";
+
+[Settings]
+Name = "Roman";
+TeamName = "Criollos";
+Race = "Criollos";
+Sex = "Male";
+Voice = "Derm3";
+VoicePitch = 1;
+Skin = "HALO_SKIN";
+EnemySkin = "Gecko";
+EnemyName = "Draakans";
+PlayerTeam = 1;
+EnemyTeam = 2;
+StartLives = 3;
+EnemyRace = "Draakan";

@@ -1,0 +1,31 @@
+;Saved by |-{DRK}-|DarkDragonDX on 08/18/2010 at 11:01 PM
+
+[Character]
+transform = "-1054.25 510.256 92.3871 0 0 -1 1.38941";
+velocity = "0 0 0";
+damage = "0.645";
+race = "Draakan";
+armor = "LIGHT";
+energy = "60";
+whiteOut = "0";
+damageFlash = "0";
+cash = "";
+hasRadio = "";
+underStandsHuman = "";
+underStandsBioderm = "";
+underStandsDraakan = "";
+underStandsCriollos = "";
+
+[Inventory]
+slotCount = "5";
+slot0 = "Blaster";
+slot0Ammo = "";
+slot1 = "Disc";
+slot1Ammo = "12";
+slot2 = "Chaingun";
+slot2Ammo = "0";
+slot3 = "Flamer";
+slot3Ammo = "";
+slot4 = "TargetingLaser";
+slot4Ammo = "";
+healthKits = "0";

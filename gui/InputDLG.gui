@@ -1,0 +1,91 @@
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(InputDLG) {
+	profile = "DlgBackProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	hideCursor = "0";
+	bypassHideCursor = "0";
+	helpTag = "0";
+
+	new ShellPaneCtrl(InputTransFrame) {
+		profile = "ShellDlgPaneProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "120 157";
+		extent = "400 118";
+		minExtent = "48 92";
+		visible = "1";
+		hideCursor = "0";
+		bypassHideCursor = "0";
+		helpTag = "0";
+		text = "Input";
+		longTextBuffer = "0";
+		maxLength = "255";
+		noTitleBar = "0";
+
+		new ShellBitmapButton(InputDone) {
+			profile = "ShellButtonProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "120 70";
+			extent = "140 38";
+			minExtent = "32 38";
+			visible = "1";
+			hideCursor = "0";
+			bypassHideCursor = "0";
+			command = "";
+			helpTag = "0";
+			text = "DONE";
+            command = "InputOnDone();";
+			simpleStyle = "0";
+		};
+		new GuiTextCtrl(InputText) {
+			profile = "SiegeHalftimeClockProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "22 27";
+			extent = "76 22";
+			minExtent = "8 8";
+			visible = "1";
+			hideCursor = "0";
+			bypassHideCursor = "0";
+			helpTag = "0";
+			text = "Text";
+			longTextBuffer = "0";
+			maxLength = "255";
+		};
+		new ShellTextEditCtrl(Input) {
+			profile = "NewTextEditProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "12 42";
+			extent = "362 38";
+			minExtent = "32 38";
+			visible = "1";
+			hideCursor = "0";
+			bypassHideCursor = "0";
+			variable = "";
+			command = "";
+			helpTag = "0";
+			longTextBuffer = "0";
+			maxLength = "255";
+			historySize = "0";
+			password = "0";
+			IRCName = "0";
+			tabComplete = "0";
+			deniedSound = "InputDeniedSound";
+			glowOffset = "9 9";
+		};
+	};
+};
+//--- OBJECT WRITE END ---
+
+function InputOnDone()
+{
+canvas.popDialog(InputDLG);
+commandToServer('InputDone',$InputType,Input.getValue());
+}

@@ -1,0 +1,8 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Weapon: Mortar<spop>
+<spush><font:Univers:15>
+Shoot em' down.
+<spop>
+
+<just:center><bitmap:twb/twb_Missilelauncher><sbreak>
+
+A heat seeking missile is fired from this launcher which can track both vehicles and infantry.

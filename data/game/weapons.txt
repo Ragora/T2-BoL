@@ -1,0 +1,62 @@
+;Prices work in whole US dollars
+;This is just for store intergration
+;Anything without 'display' set will show as the db name in browser
+
+[Weapon]
+DataBlock = Blaster;
+Price = 50;
+SellPrice = 30;
+
+[Weapon]
+DataBlock = Chaingun;
+Price = 50;
+SellPrice = 30;
+
+[Weapon]
+DataBlock = Disc;
+Price = 50;
+SellPrice = 30;
+Display = "SpinFusor";
+
+[Weapon]
+DataBlock = ELFGun;
+Price = 50;
+SellPrice = 30;
+Display = "ELF Gun";
+
+[Weapon]
+DataBlock = GrenadeLauncher;
+Price = 50;
+SellPrice = 30;
+Display = "Grenade Launcher";
+
+[Weapon]
+DataBlock = MissileLauncher;
+Price = 50;
+SellPrice = 30;
+Display = "Missile Launcher";
+
+[Weapon]
+DataBlock = Mortar;
+Price = 50;
+SellPrice = 30;
+Display = "Fusion Mortar";
+
+[Weapon]
+DataBlock = Plasma;
+Price = 50;
+SellPrice = 30;
+Display = "Plasma Rifle";
+
+[Weapon]
+DataBlock = Shocklance;
+Price = 50;
+SellPrice = 30;
+
+[Weapon]
+DataBlock = SniperRifle;
+Price = 50;
+SellPrice = 30;
+Display = "Laser Rifle";
+
+

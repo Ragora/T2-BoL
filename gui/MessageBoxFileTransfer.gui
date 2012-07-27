@@ -1,0 +1,75 @@
+//--- OBJECT WRITE BEGIN ---
+new GuiControl(MessageBoxTransfer) {
+	profile = "DlgBackProfile";
+	horizSizing = "width";
+	vertSizing = "height";
+	position = "0 0";
+	extent = "640 480";
+	minExtent = "8 8";
+	visible = "1";
+	hideCursor = "0";
+	bypassHideCursor = "0";
+	helpTag = "0";
+
+	new ShellPaneCtrl(MBTransFrame) {
+		profile = "ShellDlgPaneProfile";
+		horizSizing = "center";
+		vertSizing = "center";
+		position = "170 184";
+		extent = "300 111";
+		minExtent = "48 92";
+		visible = "1";
+		hideCursor = "0";
+		bypassHideCursor = "0";
+		helpTag = "0";
+		text = "Updating";
+		longTextBuffer = "0";
+		maxLength = "255";
+		noTitleBar = "0";
+
+		new GuiProgressCtrl() {
+			profile = "ShellProgressBarProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "19 28";
+			extent = "262 24";
+			minExtent = "8 8";
+			visible = "1";
+			hideCursor = "0";
+			bypassHideCursor = "0";
+			helpTag = "0";
+
+			new GuiTextCtrl(UpdateProgress) {
+				profile = "ShellProgressBarTextProfile";
+				horizSizing = "right";
+				vertSizing = "bottom";
+				position = "0 3";
+				extent = "262 19";
+				minExtent = "8 8";
+				visible = "1";
+				hideCursor = "0";
+				bypassHideCursor = "0";
+				helpTag = "0";
+				text = "Updating file";
+				longTextBuffer = "0";
+				maxLength = "255";
+			};
+		};
+		new GuiTextCtrl() {
+			profile = "NewTextEditProfile";
+			horizSizing = "right";
+			vertSizing = "bottom";
+			position = "114 65";
+			extent = "254 64";
+			minExtent = "8 8";
+			visible = "1";
+			hideCursor = "0";
+			bypassHideCursor = "0";
+			helpTag = "0";
+			text = "Please wait...";
+			longTextBuffer = "0";
+			maxLength = "255";
+		};
+	};
+};
+//--- OBJECT WRITE END ---

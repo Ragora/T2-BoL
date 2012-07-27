@@ -1,0 +1,31 @@
+;Gem Listing
+
+[Gem]
+Name = "Sapphire";
+Price = 5000;
+SellPrice = 10000;
+
+[Gem]
+Name = "Diamond";
+Price = 5000;
+SellPrice = 10000;
+
+[Gem]
+Name = "Ruby";
+Price = 5000;
+SellPrice = 10000;
+
+[Gem]
+Name = "Opal";
+Price = 5000;
+SellPrice = 10000;
+
+[Gem]
+Name = "Jade";
+Price = 5000;
+SellPrice = 10000;
+
+[Gem]
+Name = "Turquoise";
+Price = 5000;
+SellPrice = 10000;

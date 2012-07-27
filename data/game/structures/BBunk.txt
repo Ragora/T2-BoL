@@ -1,0 +1,9 @@
+;Prices work in whole US dollars
+
+[Structure]
+Name = "Small Cabin";
+Price = 5000;
+SellPrice = 10000;
+MaterialList = "Wood 10 Stone 10";
+File = "SMLCabin.cs";
+
