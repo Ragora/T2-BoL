@@ -72,5 +72,5 @@ datablock StaticShapeData(DeployedSpine) : StaticShapeDamageProfile {
 //----------------------------------------------------------------------------
 function DetructableSecurityCamera::onDestroyed(%this, %obj)
 {
-schedule(1000,0,"delete",%obj);
+	schedule(1000,0,"delete",%obj);
 }

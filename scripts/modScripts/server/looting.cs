@@ -38,70 +38,69 @@ datablock ItemData(Lootbag)
 
 function LootBagCheckForPickUp(%this) //Not sure why, loot bags won't do a T2 system pickup..
 {
-cancel(%this.loop);
+	cancel(%this.loop);
 
-if (!IsObject(%this))
-return;
+	if (!IsObject(%this))
+		return;
 
-%count = MissionCleanUp.getCount();
+	%count = MissionCleanUp.getCount();
 
-for(%i = 0; %i < %count; %i++)
-{
-%test = MissionCleanUp.getObject(%i);
+	for(%i = 0; %i < %count; %i++)
+	{
+		%test = MissionCleanUp.getObject(%i);
 
-if (%test.getClassName() $= "Player" && %test.getState() !$= "dead" && !%test.client.isAIControlled())
-{
-%dist = vectorDist(%this.getPosition(),%test.getPosition());
+		if (%test.getClassName() $= "Player" && %test.getState() !$= "dead" && !%test.client.isAIControlled())
+		{
+			%dist = vectorDist(%this.getPosition(),%test.getPosition());
 
-if (%dist < %this.getDatablock().pickUpRadius)
-{
-LootBagPickedUp(%this,%test.client);
-return;
-}
+			if (%dist < %this.getDatablock().pickUpRadius)
+			{
+				LootBagPickedUp(%this,%test.client);
+				return;
+			}
 
-%this.loop = schedule(100,0,"LootBagCheckForPickup",%this);
-}
-}
+			%this.loop = schedule(100,0,"LootBagCheckForPickup",%this);
+		}
+	}
 }
 
 function LootBagPickedUp(%this,%client)
 {
-%db = %client.player.getDatablock(); //The player's datablock
-%money = %this.money; //Monies?
-%numItems = %this.numItems; //Giving out items.
-%numAmmo = %this.numAmmo; //..Ammo too!
-//Does the bag have money?
-if (%money $= "")
-%hasMoney = false;
-else
-%hasMoney = true;
+	%db = %client.player.getDatablock(); //The player's datablock
+	%money = %this.money; //Monies?
+	%numItems = %this.numItems; //Giving out items.
+	%numAmmo = %this.numAmmo; //..Ammo too!
+	//Does the bag have money?
+	if (%money $= "")
+		%hasMoney = false;
+	else
+		%hasMoney = true;
 
-if (%money !$= "")
-%client.money = %client.money + %money; //Give some monies.
+	if (%money !$= "")
+		%client.money = %client.money + %money; //Give some monies.
 
-for (%i = 0; %i < %numItems; %i++)
-{
-if (%db.max[%this.item[%i]] != 0) //Don't want people in light armor running around with mortars, do we?
-{
-%client.player.setInventory(%this.item[%i],1);
-%client.player.setInventory(%this.ammo[%i],%this.ammoNum[%i]);
-}
-}
-%this.delete(); //Delete the bag.
+	for (%i = 0; %i < %numItems; %i++)
+	{
+		if (%db.max[%this.item[%i]] != 0) //Don't want people in light armor running around with mortars, do we?
+		{
+			%client.player.setInventory(%this.item[%i],1);
+			%client.player.setInventory(%this.ammo[%i],%this.ammoNum[%i]);
+		}
+	}
+	%this.delete(); //Delete the bag.
 
-//Let the player know.
-switch (%hasMoney)
-{
-case 0:
-if (%numItems > 1)
-messageClient(%client,'MsgClient','You picked up a bag of items that contained %1 items.',%numitems);
-else
-messageClient(%client,'MsgClient','You picked up a bag of items that contained 1 item.');
-case 1:
-if (%numItems > 1)
-messageClient(%client,'MsgClient','You picked up a bag of items that contained $%1 and %2 items.',%money,%numitems);
-else
-messageClient(%client,'MsgClient','You picked up a bag of items that contained $%1 and 1 item.',%money);
+	//Let the player know.
+	switch (%hasMoney)
+	{
+		case 0:
+			if (%numItems > 1)
+				messageClient(%client,'MsgClient','You picked up a bag of items that contained %1 items.',%numitems);
+			else
+				messageClient(%client,'MsgClient','You picked up a bag of items that contained 1 item.');
+		case 1:
+			if (%numItems > 1)
+				messageClient(%client,'MsgClient','You picked up a bag of items that contained $%1 and %2 items.',%money,%numitems);
+			else
+				messageClient(%client,'MsgClient','You picked up a bag of items that contained $%1 and 1 item.',%money);
+	}
 }
-}
-

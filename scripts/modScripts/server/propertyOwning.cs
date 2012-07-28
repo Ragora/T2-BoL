@@ -9,159 +9,149 @@
 
 function InteriorInstance::buyObject(%this,%objectID,%client,%team)
 {
-if (%this.generatorCount $= "")
-%this.generatorCount = 0;
-if (%this.inventoryCount $= "")
-%this.inventoryCount = 0;
-if (%this.sensorCount $= "")
-%this.sensorCount = 0;
-if (%this.sentryCount $= "")
-%this.sentryCount = 0;
-if (%this.bannerCount $= "")
-%this.bannerCount = 0;
-if (%this.turretBaseCount $= "")
-%this.turretBaseCount = 0;
+	if (%this.generatorCount $= "")
+		%this.generatorCount = 0;
+	if (%this.inventoryCount $= "")
+		%this.inventoryCount = 0;
+	if (%this.sensorCount $= "")
+		%this.sensorCount = 0;
+	if (%this.sentryCount $= "")
+		%this.sentryCount = 0;
+	if (%this.bannerCount $= "")
+		%this.bannerCount = 0;
+	if (%this.turretBaseCount $= "")
+		%this.turretBaseCount = 0;
 
-switch(%objectID)
-{
- case 0: //Generator
- if (%this.generatorCount == $Property::Max[%this.interiorFile,0])
- return false;
+	switch(%objectID)
+	{
+		case 0: //Generator
+			if (%this.generatorCount == $Property::Max[%this.interiorFile,0])
+				return false;
 
- %shape = new StaticShape()
- {
- DataBlock = GeneratorLarge;
- Position = vectorAdd($Property::Offset[%this.interiorFile,0,%this.generatorCount],%this.getPosition());
- Rotation = $Property::Rotation[%this.interiorFile,0,%this.generatorCount];
- Team = %team;
- };
+			%shape = new StaticShape()
+			{
+				DataBlock = GeneratorLarge;
+				Position = vectorAdd($Property::Offset[%this.interiorFile,0,%this.generatorCount],%this.getPosition());
+				Rotation = $Property::Rotation[%this.interiorFile,0,%this.generatorCount];
+				Team = %team;
+			};
+	 
+			GeneratorLarge.gainPower(%shape);
+			%this.generatorCount++;
  
- GeneratorLarge.gainPower(%shape);
+		case 1: //Inventory
+			if (%this.generatorCount == 0 || %this.inventoryCount == $Property::Max[%this.interiorFile,1]) //Don't create if there's no generators
+				return false;
  
- %this.generatorCount++;
+			%shape = new StaticShape()
+			{
+				DataBlock = StationInventory;
+				Position = vectorAdd($Property::Offset[%this.interiorFile,1,%this.inventoryCount],%this.getPosition());
+				Rotation = $Property::Rotation[%this.interiorFile,1,%this.inventoryCount];
+				Team = %team;
+			};
  
- case 1: //Inventory
- if (%this.generatorCount == 0 || %this.inventoryCount == $Property::Max[%this.interiorFile,1]) //Don't create if there's no generators
- return false;
+			StationInventory.gainPower(%shape);
+			%this.inventoryCount++;
  
- %shape = new StaticShape()
- {
- DataBlock = StationInventory;
- Position = vectorAdd($Property::Offset[%this.interiorFile,1,%this.inventoryCount],%this.getPosition());
- Rotation = $Property::Rotation[%this.interiorFile,1,%this.inventoryCount];
- Team = %team;
- };
+		case 2: //Sensor (Medium)
+			if (%this.generatorCount == 0 || %this.sensorCount == $Property::Max[%this.interiorFile,2])
+				return false;
+
+			%shape = new StaticShape()
+			{
+				DataBlock = SensorMediumPulse;
+				Position = vectorAdd($Property::Offset[%this.interiorFile,2,%this.sensorCount],%this.getPosition());
+				Rotation = $Property::Rotation[%this.interiorFile,2,%this.sensorCount];
+				Team = %team;
+			};
+			SensorMediumPulse.gainPower(%shape);
+			%this.sensorCount++;
  
- StationInventory.gainPower(%shape);
+		case 3: //Sensor (Large)
+		 if (%this.generatorCount == 0 || %this.sensorCount == $Property::Max[%this.interiorFile,2])
+			return false;
 
- %this.inventoryCount++;
+		%shape = new StaticShape()
+		{
+			DataBlock = SensorLargePulse;
+			Position = vectorAdd($Property::Offset[%this.interiorFile,3,%this.sensorCount],%this.getPosition());
+			Rotation = $Property::Rotation[%this.interiorFile,3,%this.sensorCount];
+			Team = %team;
+		};
+
+		SensorLargePulse.gainPower(%shape);
+		%this.sensorCount++;
  
- case 2: //Sensor (Medium)
- if (%this.generatorCount == 0 || %this.sensorCount == $Property::Max[%this.interiorFile,2])
- return false;
+		case 4: //Sentry Turrets
+			if (%this.generatorCount == 0 || %this.sentryCount == $Property::Max[%this.interiorFile,4])
+				return false;
 
- %shape = new StaticShape()
- {
- DataBlock = SensorMediumPulse;
- Position = vectorAdd($Property::Offset[%this.interiorFile,2,%this.sensorCount],%this.getPosition());
- Rotation = $Property::Rotation[%this.interiorFile,2,%this.sensorCount];
- Team = %team;
- };
-
- SensorMediumPulse.gainPower(%shape);
-
- %this.sensorCount++;
+			%shape = new StaticShape()
+			{
+				DataBlock = SentryTurret;
+				Position = vectorAdd($Property::Offset[%this.interiorFile,4,%this.sentryCount],%this.getPosition());
+				Rotation = $Property::Rotation[%this.interiorFile,4,%this.sentryCount];
+				Team = %team;
+			};
+			SentryTurret.gainPower(%shape);
+			%this.sentryCount++;
+			
+		case 5: //Banner (Strength)
+			if (%this.bannerCount == $Property::Max[%this.interiorFile,5])
+				return false;
+			%shape = new StaticShape()
+			{
+				DataBlock = Banner_Strength;
+				Position = vectorAdd($Property::Offset[%this.interiorFile,5,%this.bannerCount],%this.getPosition());
+				Rotation = $Property::Rotation[%this.interiorFile,5,%this.bannerCount];
+				Team = %team;
+			};
+			%this.bannerCount++;
  
- case 3: //Sensor (Large)
- if (%this.generatorCount == 0 || %this.sensorCount == $Property::Max[%this.interiorFile,2])
- return false;
+		case 6: //Large Turret Base
+		if (%this.generatorCount == 0 || %this.turretBaseCount == $Property::Max[%this.interiorFile,6])
+			return false;
 
- %shape = new StaticShape()
- {
- DataBlock = SensorLargePulse;
- Position = vectorAdd($Property::Offset[%this.interiorFile,3,%this.sensorCount],%this.getPosition());
- Rotation = $Property::Rotation[%this.interiorFile,3,%this.sensorCount];
- Team = %team;
- };
+		%shape = new StaticShape()
+		{
+			DataBlock = TurretBaseLarge;
+			Position = vectorAdd($Property::Offset[%this.interiorFile,6,%this.turretBaseCount],%this.getPosition());
+			Rotation = $Property::Rotation[%this.interiorFile,6,%this.turretBaseCount];
+			Team = %team;
+		};
 
- SensorLargePulse.gainPower(%shape);
+		%this.turretBaseCount++;
+	}
 
- %this.sensorCount++;
- 
- case 4: //Sentry Turrets
- if (%this.generatorCount == 0 || %this.sentryCount == $Property::Max[%this.interiorFile,4])
- return false;
-
- %shape = new StaticShape()
- {
- DataBlock = SentryTurret;
- Position = vectorAdd($Property::Offset[%this.interiorFile,4,%this.sentryCount],%this.getPosition());
- Rotation = $Property::Rotation[%this.interiorFile,4,%this.sentryCount];
- Team = %team;
- };
-
- SentryTurret.gainPower(%shape);
-
- %this.sentryCount++;
- 
- case 5: //Banner (Strength)
- if (%this.bannerCount == $Property::Max[%this.interiorFile,5])
- return false;
-
- %shape = new StaticShape()
- {
- DataBlock = Banner_Strength;
- Position = vectorAdd($Property::Offset[%this.interiorFile,5,%this.bannerCount],%this.getPosition());
- Rotation = $Property::Rotation[%this.interiorFile,5,%this.bannerCount];
- Team = %team;
- };
-
- %this.bannerCount++;
- 
- case 6: //Large Turret Base
- if (%this.generatorCount == 0 || %this.turretBaseCount == $Property::Max[%this.interiorFile,6])
- return false;
-
- %shape = new StaticShape()
- {
- DataBlock = TurretBaseLarge;
- Position = vectorAdd($Property::Offset[%this.interiorFile,6,%this.turretBaseCount],%this.getPosition());
- Rotation = $Property::Rotation[%this.interiorFile,6,%this.turretBaseCount];
- Team = %team;
- };
-
- %this.turretBaseCount++;
-}
-
-%this.getGroup().add(%shape);
-setTargetName(%shape.target,addTaggedString(%client.namebase @ "'s"));
-setTargetSensorGroup(%shape.getTarget(), %team);
-%shape.setSelfPowered();
- 
-return %shape;
+	%this.getGroup().add(%shape);
+	setTargetName(%shape.target,addTaggedString(%client.namebase @ "'s"));
+	setTargetSensorGroup(%shape.getTarget(), %team);
+	%shape.setSelfPowered();
+	return %shape;
 }
 
 function staticShape::setPosition(%this,%pos)
 {
-%this.setTransform(%pos);
-return %this;
+	%this.setTransform(%pos);
+	return %this;
 }
 
 function staticShape::getRotation(%this)
 {
-%trans = %this.getTransform();
-return getWord(%trans, 3) SPC getWord(%trans, 4) SPC getWord(%trans,5);
+	%trans = %this.getTransform();
+	return getWord(%trans, 3) SPC getWord(%trans, 4) SPC getWord(%trans,5);
 }
 
 function objectIDToDatablock(%objectID)
 {
-switch(%objectID)
-{
- case 0: return "GeneratorLarge";
- case 1: return 0;
- default: return -1;
-}
-return -1;
+	switch(%objectID)
+	{
+		case 0: return "GeneratorLarge";
+		case 1: return 0;
+		default: return -1;
+	}
+	return -1;
 }
 
 

@@ -1,5 +1,7 @@
 //------------------------------------------------------------------------------
+// serverRequestHandler.cs
 // Server Request Handler
+// Copyright (c) 2012 The DarkDragonDX
 //==============================================================================
 
 function InteractWithObject(%val)

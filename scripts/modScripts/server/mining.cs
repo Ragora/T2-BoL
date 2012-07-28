@@ -33,6 +33,6 @@ datablock StaticShapeData(MiningBox) : StaticShapeDamageProfile {
 // -----------------------------------------------------
 function MiningBox::onAdd(%this, %obj)
 {
- %obj.startFade(1,0,1);
- %obj.applyDamage(%obj.getDataBlock().maxDamage); //Start the rock off
+	%obj.startFade(1,0,1);
+	%obj.applyDamage(%obj.getDataBlock().maxDamage); //Start the rock off
 }
