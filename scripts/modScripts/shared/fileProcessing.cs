@@ -1,54 +1,48 @@
 // -----------------------------------------------------
+// fileProcessing.cs
 // Basic file functions
+// Copyright (c) 2012 The DarkDragonDX
 // -----------------------------------------------------
 function getFileBuffer(%file)
 {
-if (!IsFile(%file))
-return "Not existant.";
+	if (!IsFile(%file))
+		return "Not existant.";
 
-new FileObject(FileBuffer);
-FileBuffer.openForRead(%file);
+	new FileObject(FileBuffer);
+	FileBuffer.openForRead(%file);
 
- while (!FileBuffer.isEOF())
- {
-  %buffer = FileBuffer.readLine() @ "\n";
- }
-FileBuffer.detach();
-return %buffer; //Long string. >.>
+	while (!FileBuffer.isEOF())
+		%buffer = FileBuffer.readLine() @ "\n";
+	FileBuffer.detach();
+	return %buffer; //Long string. >.>
 }
 
 function getLine(%file, %line)
 {
-if (!IsFile(%file))
-return "Not existant.";
+	if (!IsFile(%file))
+		return "Not existant.";
 
-new FileObject(FileLine);
-FileLine.openForRead(%file);
+	new FileObject(FileLine);
+	FileLine.openForRead(%file);
 
- for (%i = 0; %i < %line; %i++)
- {
-  %line = FileLine.readLine();
- }
-FileLine.detach();
-
-return %line;
+	for (%i = 0; %i < %line; %i++)
+		%line = FileLine.readLine();
+	FileLine.detach();
+	return %line;
 }
 
 function getLine(%file, %line)
 {
-if (!IsFile(%file))
-return "Not existant.";
+	if (!IsFile(%file))
+		return "Not existant.";
 
-new FileObject(FileLine);
-FileLine.openForRead(%file);
+	new FileObject(FileLine);
+	FileLine.openForRead(%file);
 
- for (%i = 0; %i < %line; %i++)
- {
-  %line = FileLine.readLine();
- }
-FileLine.detach();
-
-return %line;
+	for (%i = 0; %i < %line; %i++)
+		%line = FileLine.readLine();
+	FileLine.detach();
+	return %line;
 }
 
 // -----------------------------------------------------
@@ -56,9 +50,9 @@ return %line;
 // -----------------------------------------------------
 function fileObject::Detach(%this) //Detaches fileObject from file & deletes
 {
-%this.close();
-%this.delete();
-return %this;
+	%this.close();
+	%this.delete();
+	return %this;
 }
 
 
