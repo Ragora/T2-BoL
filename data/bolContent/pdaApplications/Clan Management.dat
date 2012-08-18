@@ -1,0 +1,8 @@
+; Clan Management.dat
+; Configuration file for the clan management application
+; Copyright (c) 2012 The DarkDragonDX
+
+[Application]
+Name = "Clan Management";
+ApplicationInstance = "ClanManagement"; Should not be duplicated; even if the mod could resolve duplication issues in realtime.
+Description = "The clan management system for BoL RPg Mod.";

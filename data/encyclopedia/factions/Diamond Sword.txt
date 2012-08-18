@@ -1,0 +1,9 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Faction: Diamond Sword
+<font:univers condensed:23>Specialty: Accuracy
+<font:univers condensed:23>Race: <a:select-Races-Human>Human</a><spop>
+<spush><font:Univers:15>
+Be patient and the enemy shall consume himself.
+  -- Diamond Sword saying
+<spop>
+
+<just:center><bitmap:Flag_DSword><sbreak>

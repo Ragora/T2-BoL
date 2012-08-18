@@ -1,0 +1,8 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Weapon: Mortar<spop>
+<spush><font:Univers:15>
+Pop your enemys' head.
+<spop>
+
+<just:center><bitmap:twb/twb_Laserrifle><sbreak>
+
+The Laser Rifle fires concentrated laser beams that reach it's target at lightspeed.

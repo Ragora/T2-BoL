@@ -338,9 +338,11 @@ function AIUnassignClient(%client)
 		         %client.objective.clientLevel[%client.objectiveLevel] = "";
 			}
 		}
-      %client.objective.unassignClient(%client);
-      %client.objective = "";
-		%client.objectiveWeight = 0;
+	// DDDX: Fixes some console spamming is all
+	if (isObject(%client.objective))
+		%client.objective.unassignClient(%client);
+	%client.objective = "";
+	%client.objectiveWeight = 0;
    }
    
    //debuging - refresh aidebugq() if required

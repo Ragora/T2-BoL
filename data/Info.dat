@@ -1,0 +1,8 @@
+Info.dat
+Information about this version of BoL used by servers and clients (pretty much compatability checks and updates)
+Copyright (c) 2012 The DarkDragonDX
+
+[Version]
+Major = 1;
+Minor = 1;
+Codename = Ragora;

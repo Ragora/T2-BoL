@@ -14,8 +14,9 @@ $DeathMessageCampingCount = 1;
 $DeathMessageCamping[0] = '\c0%1 was killed for camping near the Nexus.';
 																						   
  //Out of Bounds deaths
-$DeathMessageOOBCount = 1;
+$DeathMessageOOBCount = 2;
 $DeathMessageOOB[0] = '\c0%1 was killed for loitering outside the mission area.';
+$DeathMessageOOB[1] = '\c0%1 was eaten by a Grue.';
 
 $DeathMessageLavaCount = 4;
 $DeathMessageLava[0] = '\c0%1\'s last thought before falling into the lava : \'Oops\'.';

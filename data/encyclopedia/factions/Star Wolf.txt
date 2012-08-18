@@ -1,0 +1,11 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Faction: Star Wolf
+<font:univers condensed:23>Specialty: Accuracy
+<font:univers condensed:23>Race: <a:select-Races-Human>Human</a><spop>
+<spush><font:Univers:15>
+Silent as the mouths of the dead.
+  -- Starwolf saying
+<spop>
+
+<just:center><bitmap:Flag_StarWolf><sbreak>
+
+In 3941 CE, the BioDerm Hordes crushed the Starwolf tribe at the star system of Ymir. Many Starwolf merceneries now serve in the armies of other tribes.

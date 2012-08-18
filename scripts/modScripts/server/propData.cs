@@ -4,37 +4,37 @@
 //----------------------------------------------------------------------------
 // DATABLOCKS
 //----------------------------------------------------------------------------
-datablock StaticShapeData(DetructableSecurityCamera) : StaticShapeDamageProfile
-{
-    className = "SecurityCamera";
-    shapeFile = "SecurityCamera.dts";
-    maxDamage = 2.0;
-    destroyedLevel = 2.0;
-    disabledLevel = 2.0;
-    mass = 1.2;
-    elasticity = 0.1;
-    friction = 0.9;
-    collideable = 1;
-    pickupRadius = 1;
-    sticky = false;
+//datablock StaticShapeData(DetructableSecurityCamera) : StaticShapeDamageProfile
+//{
+ //   className = "SecurityCamera";
+ //   shapeFile = "SecurityCamera.dts";
+ //   maxDamage = 2.0;
+ //   destroyedLevel = 2.0;
+ //   disabledLevel = 2.0;
+ //   mass = 1.2;
+ //   elasticity = 0.1;
+ //   friction = 0.9;
+ //   collideable = 1;
+ //   pickupRadius = 1;
+ //   sticky = false;
 
-    explosion      = CameraGrenadeExplosion;
-    expDmgRadius = 1.0;
-    expDamage = 0.1;
-    expImpulse = 200.0;
-    dynamicType = $TypeMasks::StaticShapeObjectType;
-    deployedObject = true;
-    cmdCategory = "Misc";
-    cmdIcon = CMDSensorIcon;
+  //  explosion      = CameraGrenadeExplosion;
+  //  expDmgRadius = 1.0;
+  //  expDamage = 0.1;
+  //  expImpulse = 200.0;
+  //  dynamicType = $TypeMasks::StaticShapeObjectType;
+  //  deployedObject = true;
+  //  cmdCategory = "Misc";
+   // cmdIcon = CMDSensorIcon;
 
-    targetNameTag = 'Security';
-    targetTypeTag = 'Camera';
-    deployAmbientThread = true;
-    debrisShapeName = "debris_generic_small.dts";
-    debris = SmallShapeDebris;
-    heatSignature = 0;
-   	needsPower = true;
-};
+  //  targetNameTag = 'Security';
+  //  targetTypeTag = 'Camera';
+   // deployAmbientThread = true;
+   // debrisShapeName = "debris_generic_small.dts";
+  //  debris = SmallShapeDebris;
+  //  heatSignature = 0;
+   //	needsPower = true;
+//};
 
 datablock StaticShapeData(DeployedSpine) : StaticShapeDamageProfile {
 	className = "spine";

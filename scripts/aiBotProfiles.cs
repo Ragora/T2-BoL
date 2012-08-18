@@ -16,11 +16,13 @@ function aiConnectByIndex(%index, %team)
     if ($BotProfile[%index, Voice] $= "")
         $BotProfile[%index, Voice] =  "Bot1";
         
-    %skin[0] = 'BaseBot';
-    %skin[1] = 'BaseBBot';
+    %skin[0] = "BaseBot";
+    %skin[1] = "BaseBBot";
     
     if ($BotProfile[%index, Skin] $= '')
         $BotProfile[%index, Skin] = %skin[getRandom(0,1)];
+	$BotProfile[%index, Skin] = addTaggedString($BotProfile[%index, Skin]);
+	//$BotProfile[%index, Voice] = addTaggedString($BotProfile[%index, Voice]);
   
     %client =  aiConnect($BotProfile[%index, name], %team, $BotProfile[%index, skill], $BotProfile[%index, offense], $BotProfile[%index, voice], $BotProfile[%index, voicePitch]);
     %client.skin = $BotProfile[%index, skin];
@@ -251,304 +253,27 @@ function aiConnectMultiple(%numToConnect, %minSkill, %maxSkill, %team)
 	}
 }
 
-//Notes:
-//Ai Bot profiles: Balance out difficulties and settings.
-//Draakans and Derms make up most of the AI list
-//Human
-$BotProfile[0, name] = "Dalaila Hayes";
-$BotProfile[0, skill] = 0.95;
-$BotProfile[0, offense] = true;
-$BotProfile[0, voicePitch] = 0.875;
-$BotProfile[0, race] = "Human";
-$BotProfile[0, skin] = 'Swolf';
-$BotProfile[0, voice] = "Fem3";
-$BotProfile[0, sex] = "Female";
-
-$BotProfile[1, name] = "Cynthia Fisher";
-$BotProfile[1, skill] = 0.95;
-$BotProfile[1, offense] = true;
-$BotProfile[1, voicePitch] = 0.875;
-$BotProfile[1, race] = "Human";
-$BotProfile[1, skin] = "Swolf";
-$BotProfile[1, voice] = "Fem3";
-$BotProfile[1, sex] = "Female";
-
-$BotProfile[2, name] = "Commander Jackson";
-$BotProfile[2, skill] = 0.95;
-$BotProfile[2, offense] = true;
-$BotProfile[2, voicePitch] = 0.875;
-$BotProfile[2, race] = "Human";
-$BotProfile[2, skin] = 'Beagle';
-$BotProfile[2, voice] = "Male5";
-$BotProfile[2, sex] = "Male";
-
-$BotProfile[3, name] = "Corperal Jones";
-$BotProfile[3, skill] = 0.95;
-$BotProfile[3, offense] = true;
-$BotProfile[3, voicePitch] = 0.875;
-$BotProfile[3, race] = "Human";
-$BotProfile[3, skin] = 'Beagle';
-$BotProfile[3, voice] = "Male5";
-$BotProfile[3, sex] = "Male";
-
-//BioDerm
-$BotProfile[4, name] = "Beast";
-$BotProfile[4, skill] = 0.95;
-$BotProfile[4, offense] = true;
-$BotProfile[4, voicePitch] = 0.875;
-$BotProfile[4, race] = "Bioderm";
-$BotProfile[4, skin] = 'Horde';
-$BotProfile[4, voice] = "Derm3";
-$BotProfile[4, sex] = "Male";
-
-$BotProfile[5, name] = "Retch";
-$BotProfile[5, skill] = 0.78;
-$BotProfile[5, offense] = false;
-$BotProfile[5, voicePitch] = 0.789;
-$BotProfile[5, race] = "Bioderm";
-$BotProfile[5, skin] = 'Horde';
-$BotProfile[5, voice] = "Derm2";
-
-$BotProfile[6, name] = "Hagstomper";
-$BotProfile[6, skill] = 0.78;
-$BotProfile[6, offense] = false;
-$BotProfile[6, voicePitch] = 0.789;
-$BotProfile[6, race] = "Bioderm";
-$BotProfile[6, skin] = 'Horde';
-$BotProfile[6, voice] = "Derm2";
-
-$BotProfile[6, name] = "Doormat";
-$BotProfile[6, skill] = 0.78;
-$BotProfile[6, offense] = false;
-$BotProfile[6, voicePitch] = 0.789;
-$BotProfile[6, race] = "Bioderm";
-$BotProfile[6, skin] = 'Horde';
-$BotProfile[6, voice] = "Derm2";
-
-$BotProfile[7, name] = "Evenkill";
-$BotProfile[7, skill] = 0.78;
-$BotProfile[7, offense] = false;
-$BotProfile[7, voicePitch] = 0.789;
-$BotProfile[7, race] = "Bioderm";
-$BotProfile[7, skin] = 'Horde';
-$BotProfile[7, voice] = "Derm2";
-
-$BotProfile[8, name] = "Heart Eater";
-$BotProfile[8, skill] = 0.78;
-$BotProfile[8, offense] = false;
-$BotProfile[8, voicePitch] = 0.789;
-$BotProfile[8, race] = "Bioderm";
-$BotProfile[8, skin] = 'Horde';
-$BotProfile[8, voice] = "Derm2";
-
-$BotProfile[9, name] = "Torox the Backbreaker";
-$BotProfile[9, skill] = 0.78;
-$BotProfile[9, offense] = false;
-$BotProfile[9, voicePitch] = 0.789;
-$BotProfile[9, race] = "Bioderm";
-$BotProfile[9, skin] = 'Horde';
-$BotProfile[9, voice] = "Derm2";
-
-$BotProfile[10, name] = "Face Breaker";
-$BotProfile[10, skill] = 0.78;
-$BotProfile[10, offense] = false;
-$BotProfile[10, voicePitch] = 0.789;
-$BotProfile[10, race] = "Bioderm";
-$BotProfile[10, skin] = 'Horde';
-$BotProfile[10, voice] = "Derm2";
-
-$BotProfile[11, name] = "Monkey Bones";
-$BotProfile[11, skill] = 0.78;
-$BotProfile[11, offense] = false;
-$BotProfile[11, voicePitch] = 0.789;
-$BotProfile[11, race] = "Bioderm";
-$BotProfile[11, skin] = 'Horde';
-$BotProfile[11, voice] = "Derm2";
-
-$BotProfile[12, name] = "Breath of Fear";
-$BotProfile[12, skill] = 0.78;
-$BotProfile[12, offense] = false;
-$BotProfile[12, voicePitch] = 0.789;
-$BotProfile[12, race] = "Bioderm";
-$BotProfile[12, skin] = 'Horde';
-$BotProfile[12, voice] = "Derm2";
-
-$BotProfile[13, name] = "Devours-All";
-$BotProfile[13, skill] = 0.78;
-$BotProfile[13, offense] = false;
-$BotProfile[13, voicePitch] = 0.789;
-$BotProfile[13, race] = "Bioderm";
-$BotProfile[13, skin] = 'Horde';
-$BotProfile[13, voice] = "Derm2";
-
-$BotProfile[14, name] = "Skullcrusher";
-$BotProfile[14, skill] = 0.78;
-$BotProfile[14, offense] = false;
-$BotProfile[15, voicePitch] = 0.789;
-$BotProfile[16, race] = "Bioderm";
-$BotProfile[17, skin] = 'Horde';
-$BotProfile[18, voice] = "Derm2";
-
-//Draakan (Eh.. their real names use the derms' from SPDialog.cs) -- Most have their own backStory, but some are just here to take up room
-//My personal picks: Dolosus (duh?), Sharp Tooth, and Iguana
-$BotProfile[19, name] = "Dolosus"; //Dolosus Irokhirr Zhor
-$BotProfile[19, skill] = 0.95;
-$BotProfile[19, offense] = true;
-$BotProfile[19, voicePitch] = 0.875;
-$BotProfile[19, race] = "Draakan";
-$BotProfile[19, skin] = 'Gecko';
-$BotProfile[19, voice] = "Derm3";
-$BotProfile[19, sex] = "A";
-
-$BotProfile[20, name] = "Rex"; //#367378 (Genetic failure)
-$BotProfile[20, skill] = 0.89;
-$BotProfile[20, offense] = true;
-$BotProfile[20, voicePitch] = 0.781;
-$BotProfile[20, race] = "Draakan";
-$BotProfile[20, skin] = 'Gecko';
-$BotProfile[20, voice] = "Derm2";
-$BotProfile[20, sex] = "A";
-
-$BotProfile[21, name] = "Raptor"; //Hrreshig "Raptor" Kolkhris
-$BotProfile[21, skill] = 0.88;
-$BotProfile[21, offense] = true;
-$BotProfile[21, voicePitch] = 0.972;
-$BotProfile[21, race] = "Draakan";
-$BotProfile[21, skin] = 'Gecko';
-$BotProfile[21, voice] = "Derm2";
-$BotProfile[21, sex] = "A";
-
-$BotProfile[22, name] = "Iguana"; //Marakh "Iguana" Azarok
-$BotProfile[22, skill] = 0.45;
-$BotProfile[22, offense] = false;
-$BotProfile[22, voicePitch] = 0.673;
-$BotProfile[22, race] = "Draakan";
-$BotProfile[22, skin] = 'Gecko';
-$BotProfile[22, voice] = "Derm1";
-$BotProfile[22, sex] = "A";
-
-$BotProfile[23, name] = "Sharp Tooth"; //Murkhofud "Sharp Tooth" Khel
-$BotProfile[23, skill] = 0.89;
-$BotProfile[23, offense] = true;
-$BotProfile[23, voicePitch] = 0.875;
-$BotProfile[23, race] = "Draakan";
-$BotProfile[23, skin] = 'Gecko';
-$BotProfile[23, voice] = "Derm1";
-$BotProfile[23, sex] = "A";
-
-$BotProfile[24, name] = "Snake"; //Morax "Snake" Serexhar
-$BotProfile[24, skill] = 0.78;
-$BotProfile[24, offense] = false;
-$BotProfile[24, voicePitch] = 1;
-$BotProfile[24, race] = "Draakan";
-$BotProfile[24, skin] = 'Gecko';
-$BotProfile[24, voice] = "Derm2";
-$BotProfile[24, sex] = "A";
-
-$BotProfile[25, name] = "Gila"; //Gorog "Gila" Jok
-$BotProfile[25, skill] = 0.80;
-$BotProfile[25, offense] = true;
-$BotProfile[25, voicePitch] = 0.578;
-$BotProfile[25, race] = "Draakan";
-$BotProfile[25, skin] = 'Gecko';
-$BotProfile[25, voice] = "Derm1";
-$BotProfile[25, sex] = "B";
-
-$BotProfile[26, name] = "Cobra"; //Karghaz "Cobra" Tumoz
-$BotProfile[26, skill] = 0.80;
-$BotProfile[26, offense] = true;
-$BotProfile[26, voicePitch] = 0.578;
-$BotProfile[26, race] = "Draakan";
-$BotProfile[26, skin] = 'Gecko';
-$BotProfile[26, voice] = "Derm1";
-$BotProfile[26, sex] = "C";
-
-$BotProfile[27, name] = "Viper"; //Malevolox "Viper" Zon
-$BotProfile[27, skill] = 0.80;
-$BotProfile[27, offense] = true;
-$BotProfile[27, voicePitch] = 0.578;
-$BotProfile[27, race] = "Draakan";
-$BotProfile[27, skin] = 'Gecko';
-$BotProfile[27, voice] = "Derm1";
-$BotProfile[27, sex] = "A";
-
-$BotProfile[27, name] = "Komodo Dragon";
-$BotProfile[27, skill] = 0.80;
-$BotProfile[27, offense] = true;
-$BotProfile[27, voicePitch] = 0.578;
-$BotProfile[27, race] = "Draakan";
-$BotProfile[27, skin] = 'Gecko';
-$BotProfile[27, voice] = "Derm1";
-$BotProfile[27, sex] = "C";
-
-$BotProfile[27, name] = "Red Dragon";
-$BotProfile[27, skill] = 0.78;
-$BotProfile[27, offense] = false;
-$BotProfile[27, voicePitch] = 0.789;
-$BotProfile[27, race] = "Draakan";
-$BotProfile[27, skin] = 'Gecko';
-$BotProfile[27, voice] = "Derm2";
-$BotProfile[27, sex] = "A";
-
-$BotProfile[29, name] = "Torus";
-$BotProfile[29, skill] = 0.78;
-$BotProfile[29, offense] = false;
-$BotProfile[29, voicePitch] = 0.789;
-$BotProfile[29, race] = "Draakan";
-$BotProfile[29, skin] = 'Gecko';
-$BotProfile[29, voice] = "Derm2";
-$BotProfile[29, sex] = "A";
-
-$BotProfile[30, name] = "Slicer";
-$BotProfile[30, skill] = 0.78;
-$BotProfile[30, offense] = false;
-$BotProfile[30, voicePitch] = 0.789;
-$BotProfile[30, race] = "Draakan";
-$BotProfile[30, skin] = 'Gecko';
-$BotProfile[30, voice] = "Derm3";
-$BotProfile[30, sex] = "C";
-
-$BotProfile[31, name] = "Achilles";
-$BotProfile[31, skill] = 0.78;
-$BotProfile[31, offense] = false;
-$BotProfile[31, voicePitch] = 0.789;
-$BotProfile[31, race] = "Criollos";
-$BotProfile[31, skin] = 'HALO_SKIN';
-$BotProfile[31, voice] = "Derm2";
-
-$BotProfile[32, name] = "King Snake";
-$BotProfile[32, skill] = 0.78;
-$BotProfile[32, offense] = false;
-$BotProfile[32, voicePitch] = 0.789;
-$BotProfile[32, race] = "Draakan";
-$BotProfile[32, skin] = 'Gecko';
-$BotProfile[32, voice] = "Derm2";
-$BotProfile[32, sex] = "A";
-
-$BotProfile[33, name] = "Troglodyte";
-$BotProfile[33, skill] = 0.78;
-$BotProfile[33, offense] = false;
-$BotProfile[33, voicePitch] = 0.789;
-$BotProfile[33, race] = "Draakan";
-$BotProfile[33, skin] = 'Gecko';
-$BotProfile[33, voice] = "Derm2";
-$BotProfile[33, sex] = "A";
-
-//Criollos (Wow.. only two of them)
-$BotProfile[34, name] = "Alchaldes";
-$BotProfile[34, skill] = 0.78;
-$BotProfile[34, offense] = false;
-$BotProfile[34, voicePitch] = 0.789;
-$BotProfile[34, race] = "Criollos";
-$BotProfile[34, skin] = 'HALO_SKIN';
-$BotProfile[34, voice] = "Derm2";
-
-$BotProfile[35, name] = "Hammurabi";
-$BotProfile[35, skill] = 0.78;
-$BotProfile[35, offense] = false;
-$BotProfile[35, voicePitch] = 0.789;
-$BotProfile[35, race] = "Criollos";
-$BotProfile[35, skin] = 'HALO_SKIN';
-$BotProfile[35, voice] = "Derm2";
-
-$BotProfile::Count = 35;
+function aiReloadProfiles()
+{
+	if (!IsObject(BotProfiles))
+		new ScriptObject(BotProfiles) { class = "BasicDataParser"; };
+	BotProfiles.empty();
+	BotProfiles.load("prefs/Bot Profiles.conf");
+	%count = BotProfiles.count("Bot");
+	for (%i = 0; %i < %count; %i++)
+	{
+		%Entry = BotProfiles.get("Bot",%i);
+		$BotProfile[%i, name] = %Entry.element("Name");
+		$BotProfile[%i, skill] = %Entry.element("skill");
+		$BotProfile[%i, offense] = %Entry.element("offense");
+		$BotProfile[%i, voicePitch] = %Entry.element("voicePitch");
+		$BotProfile[%i, race] = %Entry.element("race");
+		$BotProfile[%i, skin] = %Entry.element("skin");
+		$BotProfile[%i, voice] = %Entry.element("voice");
+		$BotProfile[%i, sex] = %Entry.element("sex");
+	}
+	$BotProfile::Count = %count;
+	warn("scripts/aiBotProfiles.cs: Loaded" SPC %count SPC "bot profiles.");
+	return true;
+}
+aiReloadProfiles();

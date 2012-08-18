@@ -88,9 +88,10 @@ exec("scripts/gameCanvas.cs");
 exec("scripts/centerPrint.cs");
 exec("scripts/CreditsGui.cs");
 exec("serverControl.cs");
+
 //Init Shared & Client scripts
-exec("scripts/modScripts/shared/initialize.cs");
-exec("scripts/modScripts/client/initialize.cs");
+exec("scripts/modScripts/shared/initialise.cs");
+exec("scripts/modScripts/client/initialise.cs");
 if (isDemo())
    exec("scripts/DemoEndGui.cs");
 exec("scripts/ChatGui.cs");
@@ -129,14 +130,14 @@ else if($LaunchMode $= "NavBuild")
 }
 else if($LaunchMode $= "SpnBuild")
 {
-   enableWinConsole(true);
+	enableWinConsole(true);
 	$Host::Dedicated = true;
-   $ServerName = $Host::GameName;
-   $Host::MissionType = $missionType;
-   $Host::Map = $Mission;
-   setNetPort($Host::Port);
-   CreateServer($Mission, $missionType);
-   return;
+	$ServerName = $Host::GameName;
+	$Host::MissionType = $missionType;
+	$Host::Map = $Mission;
+	setNetPort($Host::Port);
+	CreateServer($Mission, $missionType);
+	return;
 }
 
 function recordMovie(%movieName, %fps)
@@ -668,18 +669,18 @@ function DispatchLaunchMode()
    if ($Host::Dedicated) //Server doesn't need to initialize client Startup
    return;
 
-//If we're offline, check if the user has a LAN account setup..
-if (!$PlayingOnline && $Pref::LANAccount::Name $= "" || $Pref::LANAccount::PassWord $= "" && $Pref::FirstRan)
-canvas.pushDialog(LANAccountCreationDLG);
+	//If we're offline, check if the user has a LAN account setup..
+	if (!$PlayingOnline && $Pref::LANAccount::Name $= "" || $Pref::LANAccount::PassWord $= "" && $Pref::FirstRan)
+	canvas.pushDialog(LANAccountCreationDLG);
 
- if (!$Pref::FirstRan)  //Technically the gameMode is included, but the BETA maps are not there
- {
-  $Pref::FirstRan = true;
-  if (!$PlayingOnline && $Pref::LANAccount::Name $= "" || $Pref::LANAccount::PassWord $= "")
-  messageBoxOk("WARNING","This version of T2Bol ("@$ModVersionText@") does not include the RPG gamemode. If possible, please update the mod.",canvas.pushDialog(LANAccountCreationDLG));
-  else
-  messageBoxOk("WARNING","This version of T2Bol ("@$ModVersionText@") does not include the RPG gamemode. If possible, please update the mod.");
- }
+	if (!$Pref::FirstRan)  //Technically the gameMode is included, but the BETA maps are not there
+	{
+		$Pref::FirstRan = true;
+		if (!$PlayingOnline && $Pref::LANAccount::Name $= "" || $Pref::LANAccount::PassWord $= "")
+			messageBoxOk("WARNING","This version of T2Bol ("@$ModVersionText@") does not include the RPG gamemode. If possible, please update the mod.",canvas.pushDialog(LANAccountCreationDLG));
+		else
+			messageBoxOk("WARNING","This version of T2Bol ("@$ModVersionText@") does not include the RPG gamemode. If possible, please update the mod.");
+	}
 }
 
 // if($LaunchMode !$= "Demo")

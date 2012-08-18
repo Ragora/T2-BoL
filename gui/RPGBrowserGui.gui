@@ -341,7 +341,3 @@ new GuiChunkedBitmapCtrl(RPGBrowserGui) {
 	};
 };
 //--- OBJECT WRITE END ---
-
-exec("scripts/RPGBrowserGui.cs");
-
-

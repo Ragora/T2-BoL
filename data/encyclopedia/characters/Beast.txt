@@ -1,0 +1,5 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Character: Beast
+<font:univers condensed:23>Race: <a:select-Races-BioDerm>BioDerm</a><spop>
+<spush><font:Univers:15>
+Beast supervises the BioDerm genetics engineering process.
+<spop>

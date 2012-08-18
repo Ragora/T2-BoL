@@ -1,0 +1,8 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Vehicle: Shrike<spop>
+<spush><font:Univers:15>
+The Shrike is your basic turbograb fighter.
+<spop>
+
+<just:center><bitmap:twb/twb_shrike><sbreak>
+
+With dual mounted blasters & 2000 CC engine, the Shrike is best for light air support & escort. A 280W shield protects the shrike from most damage, and recharages at 0.8W a second.

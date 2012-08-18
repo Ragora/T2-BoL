@@ -1,0 +1,8 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Pack: Mining Tool<spop>
+<spush><font:Univers:15>
+Warning: Aim away from face.
+<spop>
+
+<just:center><bitmap:twb/twb_Fusionmortar><sbreak>
+
+Neutrons are fired at the rock to break it apart molecule by molecule, then a tractor beam brings the segments in.

@@ -1,201 +1,276 @@
-// -----------------------------------------------------
-// Block Processing
-// -----------------------------------------------------
-function getBlockCount(%file,%blockName) //Searches a data file for all occurances of 'blockName'
+//------------------------------------------------------------------------------
+// basicDataStorage.cs
+// Originally written for T2BoL mod back in the day, now is being rewritten
+// for the original implementation was pretty crappy.
+// Requires: Array.cs
+// Copyright (c) 2012 The DarkDragonDX
+//==============================================================================
+
+//------------------------------------------------------------------------------
+// Name: BasicDataParser.load
+// Argument %file: The file to parse and load into memory.
+// Description: This function is the main function of everything; it loads
+// %file into memory.
+// Return: True if the function succeeded, false if otherwise failed.
+//==============================================================================
+function BasicDataParser::load(%this, %file)
 {
-	if (!IsFile(%file))
-		return false;
-
-	%blockSearch = strLwr("[" @ %blockName @ "]");
-
-	%fileP = new FileObject();
-	%fileP.openForRead(%file);
-
-	%count = 0;
-	while (!%fileP.isEOF())
-	{
-		%line = %fileP.readLine();
-		%lineTest = strLwr(%line);
-		%Search = strStr(%lineTest,%blockSearch);
-		if (%search != -1)
-			%count++;
-	}
-	%fileP.detach();
-	return %count;
-}
-
-function getBlockData(%file,%blockName,%num,%data) //Gets values out of a block. Note that 1 is the first block in a file for %num
-{
-	if (!IsFile(%file))
-		return false;
-
-	%blockCount = getBlockCount(%file,%blockName);
-
-	if (!%blockCount || %num > %blockCount) //None of 'typeName' exist here
-		return -1;
-
-	%blockSearch = strLwr("[" @ %blockName @ "]");
-
-	%fileP = new FileObject();
-	%fileP.openForRead(%file);
-
-	%count = 0;
-	%lineCount = 0;
-	while (!%fileP.isEOF())
-	{
-		%line = %fileP.readLine();
-		%lineCount++;
+	// Make sure we have our values initialised (math doesn't work right on nonexistent variables!)
+	if (%this.filesLoaded == "")
+		%this.filesLoaded = 0;
+	if (%this.blockEntryCount == "")
+		%this.blockEntryCount = 0;
+	if (%this.blockInstances == "") 
+		%this.blockInstances = 0;
 	
-		if (getSubStr(stripSpaces(%line),0,1) !$= ";") //If the beginning of the line is "commented", skip it.
+	%currentSeconds = formatTimeString("ss");
+	// Check to see if the data is valid (returns false if we tried to load a nonexistent file)
+	if (!isFile(%file))
+	{
+		error("basicDataStorage.cs: Attempted to load non-existent file " @ %file @ "!");
+		return false;
+	}
+	// Check to see if this file is already loaded
+	if (%this.isLoaded(%file))
+	{
+		error("basicDataStorage.cs: Attempted to reload data file " @ %file SPC "while it's already in memory! (try unloading or emptying)");
+		return false;
+	}
+	// Add the file entry to memory (for the file check above)
+	%this.files[%this.filesLoaded] = %file;
+	%this.fileIndex[%file] = %this.filesLoaded;
+	%this.filesLoaded++;
+	
+	// Load the file into memory (function is from fileProcessing.cs)
+	%fileData = strReplace(stripChars(getFileBuffer(%file),"\t"),"\n","\t");
+	%lineCount = getFieldCount(%fileData);
+	
+	%isProcessingBlock = false; // Used to set processing mode
+	%currentBlock = 0;
+	%hadError = false;
+	// Iterate through all lines
+	for (%i = 0; %i < %lineCount; %i++)
+	{
+		%currentLine = getField(%fileData,%i);
+		// Check to see if this line contains a block definition or not
+		%openingBlock = strStr(%currentLine, "[");
+		%closingBlock = strStr(%currentLine, "]");
+		
+		// If we have a block definition, it should be against left margin 
+		if (%openingBlock == 0 && %closingBlock > 0 && !%isProcessingBlock)
 		{
-			%lineTest = strLwr(%line);
-			%Search = strStr(%lineTest,%blockSearch);
-
-			if (%Search != -1 && %Count != %num)
-				%count++;
-			else if (%count == %num) //We found it, stop incrementing the count and find our data.
+			%isProcessingBlock = true;
+			%blockName = getSubStr(%currentLine,%openingBlock+1,%closingBlock-1);
+			
+			if (%this.blockInstances[%blockName] == "")
 			{
-				%Search = strStr(strLwr(%line),strLwr(%data));
-
-				%lineTest = strLwr(strReplace(%line," ","")); //See if we exited our block
-				if (GetSubStr(%lineTest, 0, 1) $= "[")  //The beginning of a new block
-					return -1;
-
-				if (%search != -1) //We found it,
+				%this.blockInstances[%blockName] = 0;
+				%this.blockEntry[%this.blockEntryCount] = %blockName;
+				%this.blockEntryCount++;
+			}
+			// Create the array to store our block data
+			%currentBlock = Array.create();
+			%currentBlock.Name = %blockName;
+			%currentBlock.File = %file; 
+			
+			%this.blocks[%blockName,%this.blockInstances] = %currentBlock;
+			%this.blockInstances[%blockName]++;
+			%this.blockInstances++;
+			continue;
+		}
+		// Results in an error
+		else if (%openingBlock == 0 && %closingBlock > 0 && %isProcessingBlock)
+		{
+			error("basicDataStorage.cs: Error loading file "@ %file @ ", block spacing error.");
+			return false;
+		}
+		
+		// If we're processing the actual block
+		if (%isProcessingBlock)
+		{
+			if (%currentLine $="" || %i == %lineCount)
+			{
+				%isProcessingBlock = false;
+				continue;
+			}
+			else
+			{
+				%eqPos = strStr(%currentLine,"="); // This is safe since the equals sign should be first.
+				if (%eqPos == -1)
 				{
-					%fileP.detach();
-
-					//Since our line might have some sort of commenting after it, we better return to just the "end" symbol..
-					%semiS =strStr(%line, ";");
-					if (%semiS == -1)
-						return -1;
-					%line = getSubStr(%line, 0, %semiS);
-					//Now find where "equals" is..
-					%equalS = strStr(%line, "=");
-					if (%equalS == -1)
-						return -1;
-					%line = getSubStr(%line, %equalS+1, strLen(%line));
-					//Is our data in single quotations? If so, convert it to a tagged string.
-					if (strStr(%line,"\x27") != -1) //It is.
-						%line = addTaggedString(stripChars(%line,"\x27"));
-					//Now return our string without quotations.
-					%line = stripChars(stripTrailingSpaces(strReplace(%line,%data,"")),"\x22");
-					return getSubStr(%line,1,strLen(%line));
+					error("basicDataStorage.cs: Unable to read entry for block" SPC %currentBlock.Name @ " in file" SPC %file @ "!");
+					%isProcessingBlock = false;
+					%hadError = true;
+					continue;
 				}
+				// Note: I got lazy here, just don't have semicolons in your data entries..
+				%semiPos = strStr(%currentLine,";");
+				if (%semiPos == -1 || getSubStrOccurance(%currentLine,";") > 1)
+				{
+					error("basicDataStorage.cs: Unable to read entry for block" SPC %currentBlock.Name @ " in file" SPC %file @ "!");
+					%isProcessingBlock = false;
+					%hadError = true;
+					continue;
+				}
+
+				%entryName = trim(getSubStr(%currentLine,0,%eqPos-1));
+				%entryValue = trim(getSubStr(%currentLine,%eqPos+1,  mAbs(%eqPos-%semiPos)-1   ));
+				%currentBlock.setElement(%entryName,%entryValue);
 			}
 		}
+		
 	}
-	%fileP.detach();
+	
+	if (!%hadError)
+		warn("basicDataStorage.cs: Successfully loaded file" SPC %file SPC "in " @ formatTimeString("ss") - %currentSeconds SPC "seconds.");
+	return !%hadError;
+}
+
+//------------------------------------------------------------------------------
+// Name: BasicDataParser.unload
+// Argument %file: The file of who's entries should be unloaded.
+// Description: This function is used to unload data by filename -- useful for
+// reloading data from specific files.
+// Return: True if the function was successful, false if otherwise failed.
+//==============================================================================
+function BasicDataParser::unload(%this, %file)
+{
+	if (!%this.isLoaded(%file))
+	{
+		error("basicDataStorage.cs: Attempted to unload non-loaded data file " @ %file @ "!");
+		return false;
+	}
+	
+	// Unload any data associated with this file now
+	%removed = "";
+	for (%i = 0; %i < %this.blockEntryCount; %i++)
+	{
+		%name = %this.blockEntry[%i];
+		for (%h = 0; %h < %this.blockInstances[%name]; %h++)
+			if (%this.blocks[%name, %h].File $= %file)
+			{
+				%this.blocks[%name, %h].delete();
+				%this.blocks[%name, %h] = "";
+				%this.blockEntry[%i] = "";
+				%removed = trim(%removed SPC %i);
+					
+				if (%this.blockInstances[%name] == 1)
+					%this.blockInstances[%name] = "";
+				else
+					%this.blockInstances[%name]--;
+			}
+	}
+	
+	// Iterate through our block entries and correct the imbalance
+	for (%i = 0; %i < getWordCount(%removed); %i++)
+	{
+		for (%h = i; %h < %this.blockEntryCount; %h++)
+			%this.blockEntry[%h-%i] = %this.blockEntry[%h+1];
+		%this.blockEntryCount--;
+	}
+	
+	// Now remove the file entry
+	for (%i = %this.fileIndex[%file]; %i < %this.filesLoaded; %i++)
+		if (%i != %this.filesLoaded-1)
+		{
+			%this.files[%i] = %this.files[%i+1];
+			%this.fileIndex[%this.files[%i+1]] = %i;
+		}
+		else
+		{
+			%this.fileIndex[%file] = "";
+			%this.files[%i] = "";
+		}
+	
+	// Decrement the files loaded count and return true
+	%this.filesLoaded--;
+	return true;
+}
+
+//------------------------------------------------------------------------------
+// Name: BasicDataParser.count
+// Argument %block: The bloick entry to count the occurances of
+// Return: The occurances of %block in this parser object. If there is no
+// such entry of %block anywhere, false (0) is returned.
+//==============================================================================
+function BasicDataParser::count(%this, %block)
+{
+	// Return zero if the block has no entries even registered
+	if (%this.blockInstances[%block] == "")
+		return false;
+	else
+		// Return the block Instances otherwise
+		return %this.blockInstances[%block];
+	return false; // Shouldn't happen
+}
+
+//------------------------------------------------------------------------------
+// Name: BasicDataParser.empty
+// Description: Empties the entire object of any information it may have
+// loaded anytime.
+// Return: True is always returned from this function.
+//==============================================================================
+function BasicDataParser::empty(%this)
+{	
+	// Iterate through our block entries and destroy them
+	for (%i = 0; %i < %this.blockEntryCount; %i++)
+	{
+		%name = %this.blockEntry[%i];
+		for (%h = 0; %h < %this.blockInstances[%name]; %h++)
+		{
+			%this.blocks[%name, %h].delete();
+			%this.blocks[%name, %h] = "";
+		}
+		%this.blockInstances[%name] = "";
+		%this.blockEntry[%i] = "";
+	}
+	
+	// Remove the files loaded entries now
+	for (%i = 0; %i < %this.filesLoaded; %i++)
+	{
+		%this.fileIndex[%this.files[%i]] = "";
+		%this.files[%i] = "";
+	}
+	
+	// Reset some variables to 0 and return true
+	%this.filesLoaded = 0;
+	%this.blockInstances = 0;
+	%this.blockEntryCount = 0;
+	
+	return true;
+}
+
+//------------------------------------------------------------------------------
+// Name: BasicDataParser.isLoaded
+// Argument %file: The file to check the loaded status of.
+// Description: Returns if %file is loaded into memory of this object or not.
+// Return: A boolean representing the loaded status.
+//==============================================================================
+function BasicDataParser::isLoaded(%this, %file)
+{
+	// Check to see if this file is already loaded
+	for (%i = 0; %i < %this.filesLoaded; %i++)
+		if (%this.files[%i] $= %file)
+			return true;
 	return false;
 }
 
-//function getBlockLength(%file,%blockName,%num) Won't work until I figure out a way to signal the end of a block without adding any extra characters,
-//{
-//if (!IsFile(%file))
-//return "Not existant.";
-
-//%blockSearch = "[" @ %blockName @ "]";
-//%blockSearch = strLwr(%blockSearch); //Convert to lowerCase
-
-//new FileObject(GetBlockCount);
-//GetBlockCount.openForRead(%file);
-
-//%count = 0;
-//%len = 0;
-// while (!GetBlockCount.isEOF())
-// {
-// %line = GetBlockCount.readLine();
-// %lineTest = strLwr(%line);
-// %Search = strStr(%lineTest,%blockSearch);
- //if (%search != -1)
-// %count++;
-// else if (%search != -1 && %count == %num) //We found our wanted block, count it.
- //{
- // if (strStr(%lineTest,%blockSearch) == -1)
- // %len++;
-//  else
-//  break;
-// }
-//}
-//GetBlockCount.detach();
-//return %len;
-//}
-
-// -----------------------------------------------------
-// Array Processing
-// -----------------------------------------------------
-function getArrayCount(%file,%array)
+//------------------------------------------------------------------------------
+// Name: BasicDataParser.get
+// Argument %block: The name of the block to return.
+// Argument %occurance: The block index we need to return -- if there's
+// multiple entries of %block.
+// Description: This function is used to retrieve block entries loaded from
+// within any of the files this object has parsed.
+// Return: An Array (array.cs) containing relevent information to the requested
+// block. If there is no such entry of %block, false is returned.
+//==============================================================================
+function BasicDataParser::get(%this, %block, %occurance)
 {
-	if (!IsFile(%file))
-		return false;
-
-	%arraySearch = strLwr("\x22" @ %array @ "\x22");
-
-	%fileP = new FileObject();
-	%fileP.openForRead(%file);
-
-	%count = 0;
-	while (!%fileP.isEOF())
-	{
-	  %line = %fileP.readLine();
-	  %lineTest = strLwr(%line);
-	  %Search = strStr(%lineTest,%typeSearch);
-	  if (%search != -1)
-		%count++;
-	}
-	%fileP.detach();
-	return %count;
-}
-
-function getArrayData(%file,%arrayName,%num)
-{
-	if (!IsFile(%file))
-		return false;
-
-	%arrayCount = getArrayCount(%file,%arrayName);
-
-	if (!%arrayCount)
-		return false;
-
-	%arraySearch = strLwr("\x22" @ %arrayName @ "\x22");
-
-	%fileP = new FileObject();
-	%fileP.openForRead(%file);
-
-	%lineCount = 0;
-	while (!%fileP.isEOF())
-	{
-		%line = stripSpaces(%fileP.readline());
-		%lineCount++;
- 
-		if (getSubStr(%line,0,1) !$= ";") //Is this line a comment?
-		{
-			%search = strStr(strLwr(%line),%arraySearch);
- 
-			if (%search !$= -1) //Found it.
-				break; //Break the loop, we know the array exists
-			if (%fileP.IsEOF() && %search == -1) //Didn't find it, return the error.
-				return false;
-		}
-	}
-
-	//Check where the array actually starts..
-	%line = %fileP.readLine();
-	if (%line $= "{") //Data starts on next line..
-	{
-		%line = %fileP.readLine(); //Drop it down one
-		for (%i = 0; %i < %num; %i++) //Keep going untill we hit the wanted data
-			%line = %fileP.readLine();
-	}
-	else //The line we just grabbed is part of the data
-	{
-		if (%num == 0) //The wanted data was on line zero..
-		return %line;
-
-		for (%i = 0; %i < %num; %i++) //Keep going untill we hit the wanted data
-			%line = %fileP.readLine();
-	}
-
-	%fileP.detach();
-	return %line;
+	// Check ti see uf thus block has only once entry -- in which case %occurance is ignored
+	if (%this.count(%block) == 1) return %this.blocks[%block, 0];
+	// Otherwise we use %occurance to return the specific index
+	else if (%occurance >= 0 && %occurance <= %this.count(%block)) return %this.blocks[%block, %occurance];
+	
+	return false;
 }

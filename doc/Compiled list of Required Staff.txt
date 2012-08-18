@@ -1,0 +1,6 @@
+Modeler (Players, Items, interactible stuff)
+Modeler (For interiors)
+Texture Artist (Stuff used in GUI's)
+Skin Artist (Person who makes textures for objects)
+Animator (For the modelers)
+Sound Artist (Maybe?)

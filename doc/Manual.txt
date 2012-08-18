@@ -1,0 +1,136 @@
+Tribes 2: Birth Of Legend Version 'Development'
+By Dark Dragon DX & Alviss ("EmperorsChamp")
+
+ --- Developing Team / Contributors ---
+
+ - Coders & Script Sources
+Dark Dragon DX
+Alviss (EmperorsChamp)
+UberGuy
+
+ - Modelers & model Sources
+Netmanx
+Velo
+Low Poly Cooperative
+Iron Sphere Development Team
+UrbanAssault
+
+- Mappers
+Blnukem
+
+- Skinners
+Numbuh 178
+Blnukem
+
+- Music/Audio Mixers & Music/Audio Sources
+Blnukem
+Josef Jahn
+
+- General Support
+Naosyth (special thanks for helping me get started on Torque scripting)
+Castiger (Lyra)
+DeathBorn (Tigr0nix)
+Zaxxman
+Mentulmhat
+DS=DragonStalker
+DeadSoldier
+NiniN
+The-Construct.net Forums
+
+ --- Weapons ---
+
+ - Draakan Flame Breath (A Draakan-only weapon)
+All Draakans are born with the ability to 'breathe' fire. 
+The Draakans use this as a lethal weapon of firery doom.
+
+
+ --- AI Characters ---
+
+ - Dolosus (Do-Loh-Sus) 
+The fearless leader of the Draakan race.
+
+ - Diamond Back
+Dolosus' "Right Hand Man", he is Dolosus' 
+
+ - SharpTooth
+One of Dolosus' guards, he loves to eliminate enemies in the bloodiest and most painful manner possible. 
+
+ - Iguana 
+One of Dolosus' guards. His favorite pack is the Cloaking Pack, thus earning him the nickname "Iguana".
+
+ - Snake 
+One of Dolosus' soldiers.
+
+ - Raptor
+The fastest, but also the weakest of all Draakans, earning him the nickname "Raptor".
+
+ - Rex
+Though his intelligance only allows him to use grunts and roars as words, he is quite grusume in battle. 
+He is one of Dolosus' soldiers.
+
+ - Denier Of Soup
+Blank
+
+ - Warg
+Blank
+
+--- PDA Help ---
+
+The Score Menu (Default Bind is F2) has been replaced by a PDA that you will use in the mod. 
+It can download programs, run a self-statistics check, and save.
+
+- Download Programs
+You can use this to download programs to your PDA, your range from the transmitter will affect how long it will take to download.
+If you're too far however, it won't download at all.
+
+- Self-Statistics
+Tells you your current stats, such as cash and your relationship with other races.
+
+- Inventory
+Shows your inventory.
+
+- Clan Management
+Use this to manage or create your own clan. You can edit your clan's name, tag, and short description at any time.
+
+--- TroubleShooting ---
+
+Q: Tribes 2 becomes a non-active window everytime I click something in the PDA, why?
+A: Opening the mission editor appears to cause this.
+S: The only solution that seems to work is restarting Tribes 2 or avoid use of the mission editor.
+
+Q: My game crashes when I host non-dedicated servers.
+A: Older versions of Structural Infinity (SI) cause crashes on non-dedicated servers. 
+S: Uninstall SI, attempt to host again.
+
+Q: My game crashes when I run Tribes 2 in offline mode without an internet connection. OR my dedicated Offline or LAN server crashes on startup.
+A: Tribes 2 has buggy TCPObjects and HTTPObjects that crash when there's no internet connection.
+S: Uninstall all scripts that require an internet connection. (Including TribesNext's main VL2, tscsri.vl2) 
+
+Q: My game crahes when I run Tribes 2 on Linux via WINE.
+A: The TCPObject code in older versions of the TribesNext patch is incompatible with WINE.
+S: Upgrade TribesNext to the latest version.
+
+Q: The game distorts my MP3 music by turning the pitch up or down.
+A: I'm not sure what causes this, T2 has a buggy MP3 player.
+S: None.
+
+Q: My game crashes or screws up horribly when I spawn in RPG.
+A: I'm not sure what causes this,
+S: Delete data/savedData.cs and report the error to a developer.
+
+Q: My dedicated server doesn't load the correct mod! And that mod doesn't even function properly.
+A: Tribes 2 cannot function with multiple mods installed to gameData/.
+S: Move all other mods (except classic) somewhere else.
+
+Q: My game is all screwed up when I launch the mod.
+A: Tribes 2 generates caches (.DSOs) of Tribes 2 scripts for faster loading. But these caches screw up the game.
+S: Run JTLdelDSO (in the mod folder) to remove the cached files.
+
+Q: My game crashes from none of the causes above. Why?
+A: Tribes 2 sometimes conflicts with itself when there are multiple mods installed.
+S: Remove all mods from Gamedata/ except T2Bol. (don't delete them) 
+
+Sierra On-Line, Inc. owns the copyright to Tribes2.
+Dark Dragon DX, DEV Team, and any associates claim the copyright
+to this Modification (the "mod"), and any derivative works of this mod.
+By using this mod you must agree with the end user license agreement ("EULA.txt").

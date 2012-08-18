@@ -1,0 +1,8 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Weapon: Mortar<spop>
+<spush><font:Univers:15>
+Aim away from face.
+<spop>
+
+<just:center><bitmap:twb/twb_Plasmarifle><sbreak>
+
+Capable of melting flesh, the Plasmarifle fires balls of plasma.

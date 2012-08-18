@@ -2178,5 +2178,5 @@ function SiegeHalftimeHeaderText::onResize( %this, %width, %height )
 
 //Was moved to client.cs from console_end.cs because alxPlayMusic didn't want to work from console_end.cs for some odd reason ...
 if ($pref::Audio::musicEnabled)
-alxPlayMusic("T2BOL/Music/Menu.mp3");
+	alxPlayMusic("T2BOL/Music/Menu.mp3");
 

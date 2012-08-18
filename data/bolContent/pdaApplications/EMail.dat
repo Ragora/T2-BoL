@@ -1,0 +1,8 @@
+; Email.dat
+; Configuration file for the BoL E-Mail client
+; Copyright (c) 2012 The DarkDragonDX
+
+[Application]
+Name = "E-Mail";
+ApplicationInstance = "EMailClient"; Should not be duplicated; even if the mod could resolve duplication issues in realtime.
+Description = "An E-Mail client for the Birth of Legend RPG Mod.";

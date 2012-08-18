@@ -1,0 +1,9 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Race: Criollos<spop>
+<spush><font:Univers:15>
+Could we really rip a hole in the universe?
+  -- Hammurabi
+<spop>
+
+<just:center><bitmap:logo_small_storm><sbreak>
+
+The Criollos are smart bastards, their leader Alchaldes beat the best Super Computer at Chess. 

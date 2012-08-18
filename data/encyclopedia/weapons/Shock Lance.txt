@@ -1,0 +1,8 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Weapon: Mortar<spop>
+<spush><font:Univers:15>
+Go shove 10,000 volts of electricity up your enemys' ass!
+<spop>
+
+<just:center><bitmap:twb/twb_Shocklance><sbreak>
+
+The shocklance fires beams of concentrated electricity at close range.

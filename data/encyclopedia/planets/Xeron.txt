@@ -1,0 +1,6 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Planet: Xeron<spop>
+<spush><font:Univers:15>
+Xeron looks a lot hotter than it actually is from space.
+<spop>
+
+<just:center><bitmap:Xeron><sbreak>

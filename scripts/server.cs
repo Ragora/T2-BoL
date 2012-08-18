@@ -27,20 +27,6 @@ function onTelnetConnect(%ip, %access)
    }
 }
 
-function serverThink()
-{
-if ($CurrentMissionType $= "RPG")
-{
-%count = ClientGroup.getCount();
-for (%i = 0; %i < %count; %i++)
-{
- %cl = ClientGroup.getObject(%i);
- commandToClient(%cl,'HandleScriptedCommand',9,formatTimeString("HHnn") SPC "Hrs.");
-}
-}
-schedule(100,0,"ServerThink");
-}
-
 function clearTelnetSpam()
 {
    $TelnetSpam = 0;
@@ -157,13 +143,10 @@ function CreateServer(%mission, %missionType)
    exec("scripts/serverTasks.cs");
    exec("scripts/admin.cs");
    exec("prefs/banlist.cs");
-   exec("scripts/shared.cs");
-   //T2Bol executes
-   exec("scripts/propData.cs");
-   exec("scripts/looting.cs");
-   exec("scripts/mining.cs");
-   exec("scripts/propertyOwning.cs");
-   exec("scripts/Importer/Building.cs");
+   
+   exec("scripts/modScripts/shared/initialise.cs");
+   exec("scripts/modScripts/server/initialise.cs");
+   
    //Execute saved data, if possible
    if (IsFile("Data/SavedData.cs"))
    exec("Data/SavedData.cs");
@@ -454,11 +437,6 @@ if ($Data::IsInClan[%client.GUID])
 }
 }
 
-function delete(%obj)
-{
-%obj.delete();
-}
-
 function clientDisconnect(%client,%reason)
 {
 messageClient(%client, 'onClientKicked', "");
@@ -470,20 +448,6 @@ if( isObject( %client.player ) )
 %client.setDisconnectReason( %reason );
 %client.schedule(700, "delete");
 return %client SPC %reason;
-}
-
-function HideClient(%client)
-{
-messageAll('MsgClientDrop', "", Game.kickClientName, %client );
-
-return %client;
-}
-
-function ShowClient(%client)
-{
-messageAll('MsgClientJoin', "", %client.name, %client, %client.target, %client.isAIControlled(), %client.isAdmin, %client.isSuperAdmin, %client.isSmurf, %client.Guid);
-
-return %client;
 }
 
 function forceClientSpawn(%client,%setupBool)
@@ -512,77 +476,6 @@ if (%client.oldTeam $= "")
 %client.team = %team;
 %client.setSensorGroup(%team);
 setTargetSensorGroup(%client.target,%team);
-}
-
-function forceScoreScreenOpen(%client,%page)
-{
-messageClient(%client, 'OpenHud', "", 'scoreScreen' SPC "scoreScreen");
-RPGGame::processGameLink(Game, %client, %page);
-}
-
-function closeScoreScreen(%client)
-{
-%client.PDAPage = "MAIN";
-serverCmdProcessGameLink(%client,"BACK");
-serverCmdHideHud(%client, 'scoreScreen');
-commandToClient(%client, 'setHudMode', 'Standard', "", 0);
-}
-
-function setVoice(%client, %voice, %voicepitch)
-{
-freeClientTarget(%client);
-%client.voice = %voice;
-%client.voicetag = addtaggedstring(%voice);
-%client.target = allocClientTarget(%client, %client.name, %client.skin, %client.voiceTag, '_ClientConnection', %client.team, 0, %client.voicePitch);
-
-if (IsObject(%client.player))
-%client.player.setTarget(%client.target);
-
-return %client SPC %voice;
-}
-
-function setSkin(%client, %skin)
-{
-freeClientTarget(%client);
-%client.skin = addtaggedstring(%skin);
-%client.target = allocClientTarget(%client, %client.name, %client.skin, %client.voiceTag, '_ClientConnection', %client.team, 0, %client.voicePitch);
-
-if (IsObject(%client.player))
-%client.player.setTarget(%client.target);
-
-return %client SPC %voice;
-}
-
-function setName(%client, %name)
-{
-freeClientTarget(%client);
-%client.namebase = %name;
-%client.name = addtaggedstring(%name);
-%client.target = allocClientTarget(%client, %client.name, %client.skin, %client.voiceTag, '_ClientConnection', %client.team, 0, %client.voicePitch);
-
-if (IsObject(%client.player))
-%client.player.setTarget(%client.target);
-
-//Update the client in the lobby.
-HideClient(%client);
-ShowClient(%client);
-
-return %client SPC %voice;
-}
-
-function setTeam(%client, %team)
-{
-freeClientTarget(%client);
-%client.target = allocClientTarget(%client, %client.name, %client.skin, %client.voiceTag, '_ClientConnection', %team, 0, %client.voicePitch);
-
-if (IsObject(%client.player))
-%client.player.setTarget(%client.target);
-
-//Update the client in the lobby.
-HideClient(%client);
-ShowClient(%client);
-
-return %client SPC %voice;
 }
 
 function initGameBots( %mission, %mType )
@@ -777,7 +670,7 @@ function kick( %client, %admin, %guid )
 	
 	if( %client.isAIControlled() )
 	{
-      $HostGameBotCount--;
+        $HostGameBotCount--;
 		%client.drop();
 	}
 	else
@@ -1201,7 +1094,7 @@ function GameConnection::onDrop(%client, %reason)
       Game.onClientLeaveGame(%client);
 
    // make sure that tagged string of player name is not used
-   if (%client.isAIControlled() && $CurrentMissionType !$= "RPG")
+   if (!%client.isAIControlled())
    {
     if ( $CurrentMissionType $= "SinglePlayer" || $CurrentMissionType $= "SV")
        messageAllExcept(%client, -1, 'MsgClientDrop', "", getTaggedString(%client.name), %client);
@@ -1500,54 +1393,6 @@ function loadMissionStage2()
 
 }
 
-function spawnGeneralBot(%id)
-{
-%bot = aiConnectByName($Bot[%id,"Name"],$Bot[%id,"Team"]);
-%bot.race = $Bot[%id,"Race"];
-%bot.sex = $Bot[%id, "Sex"];
-%bot.skin = addTaggedString($Bot[%id,"Skin"]);
-%bot.voice = $Bot[%id,"Voice"];
-%bot.voiceTag = addTaggedString(%bot.voice);
-%bot.voicePitch = $Bot[%id,"VoicePitch"];
-%bot.player.clearInventory();
-%bot.player.setArmor($Bot[%id,"Armor"]);
-setClientTeam(%bot,0); //Anyone not within the range of some sensor group is on zero -- always.
-%bot.player.setTransform($Bot[%id,"Transform"]); //Now the transform is set, if it's within a territory, the trigger will handle the team
-%bot.player.setInventory($Bot[%id,"Pack"], 1);
-//Give the bot his weaponz
-%count = getWordCount($Bot[%id,"Weapons"]);
-for (%i =  0; %i < %count; %i++)
-{
- %weapon = getWord($Bot[%id,"Weapons"],%i);
- %bot.player.setInventory(%weapon, 1);
- %bot.player.setInventory(%weapon @ "Ammo",getWord($Bot[%id,"Ammo"],%i));
- if (%i == 0) //Use our first weapon
- %bot.player.use(%weapon);
-}
-%bot.id = %id;
-
-if ($Bot[%id,"UsePack"])
-%bot.use(%bot.player.getMountedImage(2).item);
-
-setSkin(%bot,getTaggedString(%bot.skin));
-setVoice(%bot,%bot.voice);
-
-//We don't want our bot doing anything without being told
-if (!$Bot[%id,"Objectives"]) //Should stop the bot cold
-{
- AIUnassignClient(%bot);
- %bot.stop();
- %bot.clearTasks();
- %bot.clearStep();
- %bot.lastDamageClient = -1;
- %bot.lastDamageTurret = -1;
- %bot.shouldEngage = -1;
- %bot.setEngageTarget(-1);
- %bot.setTargetObject(-1);
- %bot.pilotVehicle = false;
- }
-}
-
 function ShapeBase::cleanNonType(%this, %type)
 {
    if(%this.missionTypesList $= "")
@@ -1609,54 +1454,6 @@ function GameConnection::startMission(%this)
    commandToClient(%this, 'MissionStartPhase1', $missionSequence, $MissionName, MissionGroup.musicTrack);
 }
 
-function serverCMDVerifyClient(%client,%GUID,%version)
-{
-if (%version < $ModVersion) //Hold your horses! Invalid version comin' through! Although version doesn't really matter..
-return clientDisconnect(%client,"Your T2BOL version is outdated. Server is running "@$ModVersion@", you are running "@%version@". Please update your client to play on this server.");
-%client.isValid = true;
-%GUID = stripNonNumericCharacters(%GUID);
-if (%client.GUID $= "") //If the GUID isn't already set, then we must be offline.
-%client.GUID = %GUID;
-%GUID = %client.GUID;
-
-if (!$Data::IsRegistered[%GUID])
-{
- $Data::IsRegistered[%GUID] = true;
- $Data::Shots[%GUID] = 0;
- $Data::Hits[%GUID] =  0;
- $Data::Misses[%GUID] = 0;
- $Data::Kills[%GUID] = 0;
- $Data::Deaths[%GUID] = 0;
- $Data::Suicides[%GUID] = 0;
- $Data::Headshots[%GUID] = 0;
- $Data::Caps[%GUID] = 0;
- $Data::FlagReturns[%GUID] = 0;
- $Data::Won[%GUID] = 0;
- $Data::Lost[%GUID] = 0;
-}
-if (!$Data::IsRPGReady[%GUID] && $CurrentMissionType $= "RPG")
-{
- $Data::IsRPGReady[%GUID] = true;
- $Data::Sex[%GUID] = %client.sex;
- $Data::Race[%GUID] = %client.race;
- $Data::Steel[%GUID,$CurrentMission] = 0;
- $Data::Money[%GUID,$CurrentMission] = 0;
- $Data::EMail::Count[%GUID] = 1;
- $Data::EMail::Title[%GUID,1] = "Welcome";
- $Data::EMail::Sender[%GUID,1] = "The Comittee";
- $Data::EMail::Contents[%GUID,1] = "Welcome to T2Bol, try not to die.";
- $Data::EMail::Date[%GUID,1] = formatTimeString("DD, MM dd, yy @ hh:nn A");
- if ($Data::ClientCount $= "")
- $Data::ClientCount = 0;
- $Data::ClientGUID[$Data::ClientCount] = %GUID;
- $Data::ClientName[$Data::ClientCount] = %client.namebase;
- $Data::ClientCount++;
-}
-
-%client.PDAPage = "MAIN";
-saveGame();
-}
-
 function serverCmdInputDone(%client, %type, %value) //Used when creating/editing clans
 {
  switch$(%type)
@@ -1694,8 +1491,8 @@ function serverCmdMissionStartPhase1Done(%client, %seq)
       return;
    %client.currentPhase = 1;
    
-   if (!%client.isValid && $RequiresClient[$CurrentMissionType]) //Did this person say he's a client and the gamemode requires clientside stuff?
-   return clientDisconnect(%client,"You do not have a Tribes 2: Birth of Legend mod client running.");
+ //  if (!%client.isValid && $RequiresClient[$CurrentMissionType]) //Did this person say he's a client and the gamemode requires //clientside stuff?
+///   return clientDisconnect(%client,"You do not have a Tribes 2: Birth of Legend mod client running.");
    
    schedule(1000, 0, "debriefLoad", %client);
 
@@ -2037,15 +1834,6 @@ function isNumber(%text)
     return true;
 }
 //---------------------------------------------------------------
-
-//----------------------------------------------------
-// z0dd - ZOD, 3/09/02. Replaced by function below.
-//function serverCmdSADSetPassword(%client, %password)
-//{
-//   if(%client.isSuperAdmin)
-//      $Host::AdminPassword = %password;
-//}
-//----------------------------------------------------
 
 //---------------------------------------------------------
 // z0dd - ZOD, 3/10/02. New remote admin control function
@@ -3291,38 +3079,6 @@ function removeAllBots() //Wtf -- it crashes.
          %client.delete();
    }
 }
-
-function disconnectAllBots()
-{
-%count = ClientGroup.getCount();
- for (%i =  0; %i < ClientGroup.getCount(); %i++)
- {
- %cl = ClientGroup.getObject(%i);
-
-  if (%cl.isAIControlled())
-  schedule(100,0,"Drop",%cl); //Needs a bit of a delay; or else the bots won't disconnect
- }
-}
-
-function drop(%cl)
-{
-%cl.drop();
-}
-
-package ServerPackage
-{
- function AIConnection::Drop(%cl) //Fix the game crashing when .drop() is called on a bot more than once
- {
-  if (%cl.dropped)
-  return;
-  %cl.dropped = true;
-  Parent::Drop(%cl);
- }
-};
-activatePackage(ServerPackage);
-
-
-
 //------------------------------------------------------------------------------
 function getServerGUIDList()
 {
@@ -3391,19 +3147,6 @@ function serverCmdProcessGameLink(%client, %arg1, %arg2, %arg3, %arg4, %arg5)
 {
    Game.processGameLink(%client, %arg1, %arg2, %arg3, %arg4, %arg5);
 }
-
-//-----------------------------------------------------------------------------------
-// Dark Dragon DX - 1/26/10. I noticed certain objects are missing some functions.
-function InteriorInstance::GetClassName(%this)
-{
-return "InteriorInstance";
-}
-
-function Terraformer::GetClassName(%this)
-{
-return "Terraformer";
-}
-//-----------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------
 // z0dd - ZOD, 6/03/02. New function. Impact hit sounds settings from clientprefs.cs.

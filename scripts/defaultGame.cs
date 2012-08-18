@@ -1118,6 +1118,9 @@ function DefaultGame::forceObserver( %game, %client, %reason )
          }
          
       case "spawnTimeout":
+		// DDDX: Fix for AI's derping this up
+		if (!IsObject(%client))
+			return;
          %client.camera.getDataBlock().setMode( %client.camera, "observerTimeout" );
          messageClient(%client, 'MsgClientJoinTeam', '\c2You have been placed in observer mode due to delay in respawning.', %client.name, %game.getTeamName(0), %client, 0 );
          logEcho(%client.nameBase@" (cl "@%client@") was placed in observer mode due to spawn delay");
@@ -1158,8 +1161,13 @@ function DefaultGame::displayDeathMessages(%game, %clVictim, %clKiller, %damageT
    // z0dd - ZOD, 6/18/02. From Panama Jack, send the damageTypeText as the last varible
    // in each death message so client knows what weapon it was that killed them.
 
-   %victimGender = (%clVictim.sex $= "Male" ? 'him' : 'her');
-   %victimPoss = (%clVictim.sex $= "Male" ? 'his' : 'her');
+   // Handle Draakan genders
+   %victimSex = %clVictim.sex;
+   if (%victimSex $= "A" || %victimSex $= "B" || %victimSex $= "C")
+      %victimSex = "Male";
+   %victimGender = (%victimSex $= "Male" ? 'him' : 'her');
+   %victimPoss = (%victimSex $= "Male" ? 'his' : 'her');
+   
    %killerGender = (%clKiller.sex $= "Male" ? 'him' : 'her');
    %killerPoss = (%clKiller.sex $= "Male" ? 'his' : 'her');
    %victimGenderPoss = (%clVictim.sex $= "Male" ? 'he' : 'she');
@@ -3429,7 +3437,8 @@ function DefaultGame::processGameLink(%game, %client, %arg1, %arg2, %arg3, %arg4
  {
  messageClient( %client, 'ClearHud', "", 'scoreScreen', 0 );
  %client.isViewingStatistics = false;
- CTFGame::updateScoreHud(%game,%client,'scoreHud');
+ //CTFGame:updateScoreHud:(%game,%client,'scoreHud');
+ Game.updateScoreHud(%game,%client,'scoreHud');
  }
 }
 

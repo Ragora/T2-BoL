@@ -1,0 +1,9 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Faction: Phoenix
+<font:univers condensed:23>Specialty: Accuracy
+<font:univers condensed:23>Race: <a:select-Races-Human>Human</a><spop>
+<spush><font:Univers:15>
+Fire only burns the faithless.
+  -- Harbingers of Phoenix saying
+<spop>
+
+<just:center><bitmap:Flag_Phoenix><sbreak>

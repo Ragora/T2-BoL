@@ -1,5 +1,5 @@
-// MissionTypes = RPG
 // DisplayName = Earth
+// MissionTypes = RPG
 
 //--- OBJECT WRITE BEGIN ---
 new SimGroup(MissionGroup) {

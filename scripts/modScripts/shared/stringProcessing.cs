@@ -145,6 +145,7 @@ function getSubStrPos(%string,%str,%num)
 	%subC = 0;
 	for (%i = 0; %i < %len; %i++)
 	{
+		%curPos = %i;
 		%sub = getSubStr(%string,%i,1);
  
 		if (%sub $= %str)
@@ -154,15 +155,42 @@ function getSubStrPos(%string,%str,%num)
 				break;
 		}
 	}
-	return %i;
+	return %pos;
 }
 
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
+function strWhite(%string, %whiteList, %char)
+{
+	%charLen = strLen(%char);
+	for (%i = 0; %i < strLen(%whiteList); %i++)
+		for (%h = 0; %h < %charLen; %h++)
+		{
+			%whiteSeg = getSubStr(%whiteList, %i, %charLen);
+			
+		}
+	return false;
+}
+
+//------------------------------------------------------------------------------
 function getFileNameFromString(%string)
 {
-	return getSubStr(%string,getSubStrPos(%string,"/",getSubStrOccurance(%string, "/"))+1,strLen(%string));
+	if (strStr(%string, "/") == -1)
+		return %string;
+	else
+		return getSubStr(%string,getSubStrPos(%string,"/",getSubStrOccurance(%string, "/"))+1,strLen(%string));
+}
+
+//-------------------------------------------------------------------------------
+function getFileExtensionFromString(%string)
+{
+	%file = getFileNameFromString(%string);
+	%period = strStr(%file,".");
+	if (%period == -1)
+		return false;
+	else
+		return getSubStr(%string,getSubStrPos(%string,".",getSubStrOccurance(%string, "."))+1,strLen(%string));
 }
 
 //------------------------------------------------------------------------------

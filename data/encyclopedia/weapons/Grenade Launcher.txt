@@ -1,0 +1,8 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Weapon: Grenade Launcher<spop>
+<spush><font:Univers:15>
+Shoot em' down.
+<spop>
+
+<just:center><bitmap:twb/twb_Grenadelauncher><sbreak>
+
+Fires small explosive grenades.

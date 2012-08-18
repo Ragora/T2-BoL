@@ -472,8 +472,10 @@ function AIConnection::onAIConnect(%client, %name, %team, %skill, %offense, %voi
 
    echo(%client.name);
    echo("CADD: " @ %client @ " " @ %client.getAddress());
-   if ($CurrentMissionType !$= "RPG") //If it's RPG, don't increment the count
-   $HostGamePlayerCount++;
+   
+   // DDDX: Don't increment player count in RPG/Survival Games
+   if ($CurrentMissionType !$= "RPG" && $CurrentMissionType !$= "SV")
+	$HostGamePlayerCount++;
    
    //set the initial team - Game.assignClientTeam() should be called later on...
    %client.team = %team;
@@ -908,5 +910,3 @@ function AIPilotVehicle(%client)
 {
 	//this is not very well supported, but someone will find a use for this function...
 }
-
-

@@ -1,0 +1,8 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Pack: Dampening Field<spop>
+<spush><font:Univers:15>
+Blind them.
+<spop>
+
+<just:center><bitmap:twb/twb_Fusionmortar><sbreak>
+
+The dampening field comes as a base asset and a pack. When activated, the dampening field produces an electromagnetic field that prevents unauthorized signals from entering or exiting. Basically, it disables all sensor and radio activity. A special armor addon is required to detect dampening fields.

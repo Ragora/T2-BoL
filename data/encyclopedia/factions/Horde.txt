@@ -1,0 +1,9 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Faction: Horde
+<font:univers condensed:23>Specialty: Accuracy
+<font:univers condensed:23>Race: <a:select-Races-Bioderm>Bioderm</a><spop>
+<spush><font:Univers:15>
+I am of the Chainless. I am Strong. I show no mercy.
+--BioDerm battle chant
+<spop>
+
+<just:center><bitmap:Flag_Bioderm><sbreak>

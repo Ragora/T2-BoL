@@ -1,0 +1,9 @@
+; Save.dat
+; The PDA Save function for BoL RPG mod.
+; Copyright (c) 2012 The DarkDragonDX
+
+[Application]
+Name = "Save";
+ForceInstall = true; Determines if this is in the PDA by default and cannot be removed.
+ApplicationInstance = "ClanManagement"; Should not be duplicated; even if the mod could resolve duplication issues in realtime.
+Description = "The PDA Save function for BoL RPG mod.";

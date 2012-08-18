@@ -1,0 +1,39 @@
+T2Bol development roadmap.
+
+MULTIPLAYER TODO-
+Add News Browser
+Add Auto Update
+Add Economical System
+Add Special Key Bindings
+Make Sure Global Chat (In RPG) can be enabled/Disabled
+Make sure Languages can be enabled/Disabled
+Implement modified startup video
+Modify Credits (Won't be completed untill mod is done)
+Add Land Ownership
+Add a system in which clan leaders can assign clan members jobs
+Make Corpses Drop Baggies of Items
+Make sure corpses can be eaten by Draakans (for health)
+Implement 'Virtual Items' and combo system
+Add an arena, or an area of land where players can fight without worrying of death
+Add Adrupt disconnection messages
+Implement jet malfunctions that are caused by electrical disturbances
+MAKE SURE MOD HAS SMOOTH TRANSITIONS BETWEEN GAMEMODES
+Make a little special loading icon for maps without one.
+
+SINGLEPLAYER TODO-
+Upgrade T2's AI system for certain circumstances
+
+
+Completed Stuff (Multiplayer)--
+Add Account Handling for Local Area Networks (Monday, January 4th, 2009) 
+Add Reference Center (Monday, January 4th, 2009)
+Add Player Armors & Draakan Flamer (Monday, January 4th, 2009)
+Add Blood Effects (Monday, January 4th, 2009)
+Add Clan Handling (Tuesday, January 11th, 2009)
+Implement .TXT Basic Language Processor (Saturday, July 3rd, 2010)
+Implement PDA Basics (Saturday, July 3rd, 2010)
+
+Completed Stuff (SinglePlayer)--
+Add a Campaign Switch API (Saturday, July 3rd, 2010)
+
+
