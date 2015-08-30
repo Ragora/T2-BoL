@@ -1,4 +1,0 @@
-1. Encyclopedia
-2. Several New Gamemodes
-3. LAN Account Handling (I should intergrate this to work with TC's LAN GUID system)
-4. Multiple Campaign handling API

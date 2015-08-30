@@ -1,0 +1,7 @@
+*.dso
+fonts/
+Logs/
+prefs/*.cs
+t2csri/
+editor/
+StructInf/
