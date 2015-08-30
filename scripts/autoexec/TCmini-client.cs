@@ -1,102 +1,104 @@
 // Standard Construction Bologna
 // Missing all sorts of things, will probably need updated later on.
-$MiniClV = "S4e5";
+$MiniClV = "S5";
 // Construction
 package tcKeyBinding {
-function OptionsDlg::onWake( %this ) {
-if(!$tcKeyBinding) {
-$RemapName[$RemapCount] = "[C]:Select LS Beam";
-$RemapCmd[$RemapCount] = "quickPackLightSupportBeam";
-$RemapCount++;
-$RemapName[$RemapCount] = "[C]:Select Walkway";
-$RemapCmd[$RemapCount] = "quickPackLightWalkway";
-$RemapCount++;
-$RemapName[$RemapCount] = "[C]:Select MS Beam";
-$RemapCmd[$RemapCount] = "quickPackMediumSupportBeam";
-$RemapCount++;
-$RemapName[$RemapCount] = "[C]:Select Floor";
-$RemapCmd[$RemapCount] = "quickPackMediumFloor";
-$RemapCount++;
-$RemapName[$RemapCount] = "[C]:Pack Setting: Fwd";
-$RemapCmd[$RemapCount] = "cyclePackFwd";
-$RemapCount++;
-$RemapName[$RemapCount] = "[C]:Pack Setting: Back";
-$RemapCmd[$RemapCount] = "cyclePackBack";
-$RemapCount++;
-$RemapName[$RemapCount] = "[C]:Pack Setting: FFwd";
-$RemapCmd[$RemapCount] = "cyclePackFFwd";
-$RemapCount++;
-$RemapName[$RemapCount] = "[C]:Pack Setting: FBack";
-$RemapCmd[$RemapCount] = "cyclePackFBack";
-$RemapCount++;
-$RemapName[$RemapCount] = "[C]:Emote: Sit Down";
-$RemapCmd[$RemapCount] = "emoteSitDown";
-$RemapCount++;
-$RemapName[$RemapCount] = "[C]:Emote: Squat";
-$RemapCmd[$RemapCount] = "emoteSquat";
-$RemapCount++;
-$RemapName[$RemapCount] = "[C]:Emote: Jig";
-$RemapCmd[$RemapCount] = "emoteJig";
-$RemapCount++;
-$RemapName[$RemapCount] = "[C]:Emote: Lie Down";
-$RemapCmd[$RemapCount] = "emoteLieDown";
-$RemapCount++;
-$RemapName[$RemapCount] = "[C]:Emote: Heart Attack";
-$RemapCmd[$RemapCount] = "emoteHeartAttack";
-$RemapCount++;
-$RemapName[$RemapCount] = "[C]:Emote: Sucker Punch";
-$RemapCmd[$RemapCount] = "emoteSuckerPunched";
-$RemapCount++;
-$RemapName[$RemapCount] = "[#]:Hover";
-$RemapCmd[$RemapCount] = "ToggleHoverPack";
-$RemapCount++;
-//Metallic
-$RemapName[$RemapCount] = "[M]:Buy Favs";
-$RemapCmd[$RemapCount] = "MetallicBuyFavs";
-$RemapCount++;
-$RemapName[$RemapCount] = "[M]:Move Down";
-$RemapCmd[$RemapCount] = "MetallicMoveDown";
-$RemapCount++;
-$RemapName[$RemapCount] = "[M]:GetSize";
-$RemapCmd[$RemapCount] = "MetallicGetSize";
-$RemapCount++;
-$RemapName[$RemapCount] = "[M]:Copy last setsize";
-$RemapCmd[$RemapCount] = "Metallicsizecopy";
-$RemapCount++;
-$RemapName[$RemapCount] = "[M]:Setsize original";
-$RemapCmd[$RemapCount] = "Metallicsizeoriginal";
-$RemapCount++;
-$RemapName[$RemapCount] = "[M]:Setsize undo";
-$RemapCmd[$RemapCount] = "Metallicsizeundo";
-$RemapCount++;
-$RemapName[$RemapCount] = "[M]:Undo";
-$RemapCmd[$RemapCount] = "Metallicundo";
-$RemapCount++;
-$quickPackExtrasBind = true;
-$tcKeyBinding = true;
-}
-//End metallic
-// End Construction
-parent::onWake(%this);
-}
-function doScreenShot(%val)
-{
-%temp = panoramaGui.beaconsVisible;
-panoramaGui.beaconsVisible = false;
-if(!%val) {
-if(!$pref::showHudOnShots)
-HideHudHACK(0);
-%suffix = formatTimeString(".M-d-y.hhnnss");
-screenShot("screen" @ %suffix @ ".png");
-HideHudHACK(1);
-}
-panoramaGui.beaconsVisible = %temp;
-}
-function MessageVector::pushBackLine(%this, %text, %tag)
-{
-%line = (%params = strlwr(%text));
-while (%line !$= "") {
-%params = nextToken(%params,line,"<");
+	function OptionsDlg::onWake( %this ) {
+		if(!$tcKeyBinding) {
+			$RemapName[$RemapCount] = "[C]:Select LS Beam";
+			$RemapCmd[$RemapCount] = "quickPackLightSupportBeam";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[C]:Select Walkway";
+			$RemapCmd[$RemapCount] = "quickPackLightWalkway";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[C]:Select MS Beam";
+			$RemapCmd[$RemapCount] = "quickPackMediumSupportBeam";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[C]:Select Floor";
+			$RemapCmd[$RemapCount] = "quickPackMediumFloor";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[C]:Pack Setting: Fwd";
+			$RemapCmd[$RemapCount] = "cyclePackFwd";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[C]:Pack Setting: Back";
+			$RemapCmd[$RemapCount] = "cyclePackBack";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[C]:Pack Setting: FFwd";
+			$RemapCmd[$RemapCount] = "cyclePackFFwd";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[C]:Pack Setting: FBack";
+			$RemapCmd[$RemapCount] = "cyclePackFBack";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[C]:Emote: Sit Down";
+			$RemapCmd[$RemapCount] = "emoteSitDown";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[C]:Emote: Squat";
+			$RemapCmd[$RemapCount] = "emoteSquat";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[C]:Emote: Jig";
+			$RemapCmd[$RemapCount] = "emoteJig";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[C]:Emote: Lie Down";
+			$RemapCmd[$RemapCount] = "emoteLieDown";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[C]:Emote: Heart Attack";
+			$RemapCmd[$RemapCount] = "emoteHeartAttack";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[C]:Emote: Sucker Punch";
+			$RemapCmd[$RemapCount] = "emoteSuckerPunched";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[#]:Hover";
+			$RemapCmd[$RemapCount] = "ToggleHoverPack";
+			$RemapCount++;
+			//Metallic
+			$RemapName[$RemapCount] = "[M]:Buy Favs";
+			$RemapCmd[$RemapCount] = "MetallicBuyFavs";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[M]:Move Down";
+			$RemapCmd[$RemapCount] = "MetallicMoveDown";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[M]:GetSize";
+			$RemapCmd[$RemapCount] = "MetallicGetSize";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[M]:Copy last setsize";
+			$RemapCmd[$RemapCount] = "Metallicsizecopy";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[M]:Setsize original";
+			$RemapCmd[$RemapCount] = "Metallicsizeoriginal";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[M]:Setsize undo";
+			$RemapCmd[$RemapCount] = "Metallicsizeundo";
+			$RemapCount++;
+			$RemapName[$RemapCount] = "[M]:Undo";
+			$RemapCmd[$RemapCount] = "Metallicundo";
+			$RemapCount++;
+			$quickPackExtrasBind = true;
+			$tcKeyBinding = true;
+		}
+		// End metallic
+		// End Construction
+		parent::onWake(%this);
+	}
+	
+	function doScreenShot(%val)
+	{
+		%temp = panoramaGui.beaconsVisible;
+		panoramaGui.beaconsVisible = false;
+		if(!%val) {
+			if(!$pref::showHudOnShots)
+			HideHudHACK(0);
+			%suffix = formatTimeString(".M-d-y.hhnnss");
+			screenShot("screen" @ %suffix @ ".png");
+			HideHudHACK(1);
+		}
+		panoramaGui.beaconsVisible = %temp;
+	}
+	
+	function MessageVector::pushBackLine(%this, %text, %tag) 
+	{
+		%line = (%params = strlwr(%text));
+		while (%line !$= "") {
+			%params = nextToken(%params,line,"<");
 			
 			// This tag is probably unrelated to the exploit -- just skip it
 			if ((strstr(%line,"t2server") == -1) && (strstr(%line,"tribe") == -1)) continue;
@@ -106,15 +108,18 @@ while (%line !$= "") {
 		
 		parent::pushBackLine(%this, %text, %tag);
 	}
+	
 	function MessageHud_Edit::eval(%this)
 	{
 		%this.setValue(collapseEscape(%this.getValue()));
 		parent::eval(%this);
 	}
+	
 	function GuiMessageVectorCtrl::onAdd(%this)
 	{
 		%this.allowedMatches[0] = "http";
-	}	
+	}
+	
 	function LobbyMessageVector::urlClickCallback(%this, %url)
 	{
 		MessageBoxOK( "Link Clicked", "<font:Univers Condensed Bold:22>Ctrl+V has been set to:<font:Univers Condensed:22>\n"@%url );
@@ -235,22 +240,26 @@ function Metallicundo(%val) {
 	if (%val)
 	commandToServer('Metallic',"undo");
 }
+
 function ToggleHoverPack(%val) {
 	if (%val)
 	commandToServer('activateHoverPack');
 }
+
 function clientCmdsetBlackOut(%fadeTOBlackBool, %timeMS){
 	serverconnection.setBlackOut(%fadeTOBlackBool, %timeMS);
 }
+
 function runClientUpdateCheck(%version) {
 	%script = "/MCTC/"@%version@"/";
-	%server = "direct.the-construct.net:80";
+	%server = "www.the-construct.net:80";
 	if (!isObject(MCTCbite))
-	%bite = new HTTPObject(MCTCbite){};
+		%bite = new HTTPObject(MCTCbite){};
 	else %bite = MCTCbite;
 	%bite.get(%server, %script);
 	return;
 }
+
 function MCTCbite::onLine(%this, %line) {
 	%eof = (strstr(firstWord(%line),"#EOF") != -1);
 	if (getword(%line,0) $= "#rgrrgr") {MCTCbite.disconnect(); return;}
@@ -280,9 +289,9 @@ function MCTCbite::onLine(%this, %line) {
 }
 
 // // Structural Infinity Client
-// Version: Beta 0.9 TCMC
-// Written by Electricutioner
-// 5/24/2010
+// Version: Beta 0.92 TCMC
+// Written by Electricutioner & Krash
+// 6/21/2013
 
 // Structural Infinity enabled clients are able to see over 1024
 // objects. Don't sweat the details, little monkey.
@@ -304,7 +313,7 @@ function MCTCbite::onLine(%this, %line) {
 //
 // By editing this file, you agree to abide by the terms of the LGPL.
 
-$StructuralInfinity::Info::ClientVersion = 0.91;
+$StructuralInfinity::Info::ClientVersion = 0.92;
 $StructuralInfinity::AutoUpdate::UpdateFile = "client";
 
 $StructuralInfinity::Notification::Transform = 1;
@@ -375,16 +384,29 @@ function clientCmdStructInfNotify(%obj, %type, %payload)
 			%datablock = ServerConnection.getObject(getWord(%payload, 10) + 1);
 
 			if (!isObject(%datablock))
-				return;
-
-			%type = getSubStr(%datablock.getClassName(), 0, strLen(%datablock.getClassName()) - 4);
-
-			%this = new (%type)()
 			{
-				datablock = %datablock;
-				scale = %scale;
-				serverPointer = %obj;
-			};
+				if (isFile("shapes/"@%datablock))
+				{
+					%this = new TSStatic()
+					{
+						shapeName = %datablock;
+						scale = %scale;
+						serverPointer = %obj;
+					};
+				} else return;
+			}
+			else
+			{
+				%type = getSubStr(%datablock.getClassName(), 0, strLen(%datablock.getClassName()) - 4);
+
+				%this = new (%type)()
+				{
+					datablock = %datablock;
+					scale = %scale;
+					serverPointer = %obj;
+				};
+			}
+			
 			%this.setTransform(%trans);
 			SIPieces.add(%this);
 
@@ -529,6 +551,14 @@ function clientCmdStructInfVersionAnnounce(%version, %friendlyTagColor)
 	%version = getWord(%version, 0);
 	if (%version >= 0.5) // payload compression added in server 0.5
 		$StructuralInfinity::Status::PayloadCompression = 1;
+		
+	if (%version > 0.7) // TCP RPC channel added after server v0.7
+	{
+		if (isObject(StructuralInfinityRPC)) StructuralInfinityRPC.delete();
+		%RPC = new TCPObject(StructuralInfinityRPC);
+		%RPC.connect(ServerConnection.getAddress());
+		echo("Attempting to connect to SI RPC channel...");
+	}
 
 	// get the allied team IFF color from the server
 	$StructuralInfinity::HealthTeam = %friendlyTagColor;
@@ -963,6 +993,22 @@ function SI_setHealthPercentage(%percent)
 		$StructuralInfinity::HealthUI.extent = mFloor(%percent * 48) SPC 10;
 }
 
+// receive RPC notifications from the TPC server and pass them into the notification system
+function StructuralInfinityRPC::onLine(%this, %line)
+{
+	%line = nextToken(%line, obj, "\t");
+	%payload = collapseEscape(nextToken(%line, type, "\t"));
+	
+	clientCmdStructInfNotify(%obj, %type, %payload);
+}
+
+function StructuralInfinityRPC::onConnected(%this)
+{
+	// we successfully connected, so could reconnect if we lose connection, maybe... later
+	echo("SI RPC channel successfully connected.");
+	%this.connected = true;
+}
+
 package StructuralInfinityClient
 {
 	// cleanup any client virtual ghosts when leaving a server
@@ -975,6 +1021,7 @@ package StructuralInfinityClient
 		parent::CreateServer(%mission, %missionType);
 		if (!isActivePackage(t2csri_server)) exec("t2csri/serverGlue.cs");
 	}
+
 	function clientCmdMissionEnd(%seq)
 	{
 		if (isObject(SIPieces))
@@ -986,6 +1033,7 @@ package StructuralInfinityClient
 		}
 		Parent::clientCmdMissionEnd(%seq);
 	}
+	
 	function DisconnectedCleanup()
 	{
 		if (isObject(SIPieces))
@@ -996,6 +1044,13 @@ package StructuralInfinityClient
 			}
 			SIPieces.delete();
 		}
+		
+		if (isObject(StructuralInfinityRPC)) 
+		{
+			StructuralInfinityRPC.disconnect();
+			StructuralInfinityRPC.delete();
+		}
+		
 		deleteVariables("$StructuralInfinity::SpatialHashMap*");
 		deleteVariables("$StructuralInfinity::ClientIndexMap*");
 		$StructuralInfinity::Status::Active = 0;
@@ -1041,6 +1096,7 @@ package StructuralInfinityClient
 		}
 	}
 };
+
 if ($Game::argv1 !$= "-dedicated" && !isObject(ServerGroup) && !isActivePackage(StructuralInfinityClient))
 {
 	activatePackage(StructuralInfinityClient);
@@ -1049,4 +1105,3 @@ if ($Game::argv1 !$= "-dedicated" && !isObject(ServerGroup) && !isActivePackage(
 }
 
 
-echo("#EOF");

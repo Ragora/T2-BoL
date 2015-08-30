@@ -1194,6 +1194,10 @@ function serverCmdShowHud(%client, %tag)
    %tagName = getWord(%tag, 1);
    %tag = getWord(%tag, 0);
    messageClient(%client, 'OpenHud', "", %tag);
+   
+   	if (%tag $= 'scoreScreen')
+		serverCmdProcessGameLink(%client,%client.PDAPage);
+		
    switch$ (%tag)
    {
       case 'inventoryScreen':

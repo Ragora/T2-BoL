@@ -68,8 +68,8 @@ function serverCmdThrowWeapon(%client,%data)
    // %data = ItemDataBlock[%item];
 
    //Don't let Draakans drop flame breath
-   if (%client.getControlObject().getMountedImage(0).getName() $= "FlamerImage" && %client.race $= "Draakan")
-   return;
+   if (!isObject(%client) || (%client.getControlObject().getMountedImage(0).getName() $= "FlamerImage" && %client.race $= "Draakan"))
+		return;
    
    %client.getControlObject().throwWeapon();
 }

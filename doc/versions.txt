@@ -1,0 +1,14 @@
+Versioning scheme goes as such:
+
+Major.Minor.Revision
+Changes in the major portion means that any client/servers that do not have matching major versions
+will immediately be determined as incompatible and will be asked to upgrade (or downgrade in some events)
+
+Changes in minor are generally feature implementations that do not affect overall compatability between newer
+and older versions of the modification.
+
+Changes in revision indicate quick bugfixes that are released as small patches for the modification rather
+than an entirely new download.
+
+1.0:
+	

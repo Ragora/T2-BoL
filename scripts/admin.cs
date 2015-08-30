@@ -2,7 +2,7 @@
 $VoteMessage["VoteAdminPlayer"] = "Admin Player";
 $VoteMessage["VoteKickPlayer"] = "Kick Player";
 $VoteMessage["VoteLockServer"] = "Lock Server";
-$VoteMessage["VoteGlobal"] = "Global Chat";
+$VoteMessage["VoteGlobal"] = "global Chat";
 $VoteMessage["VoteProgressiveMode"] = "Toggle Progressive Mode";
 $VoteMessage["BanPlayer"] = "Ban Player";
 $VoteMessage["VoteChangeMission"] = "change the mission to";

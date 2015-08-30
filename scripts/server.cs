@@ -450,34 +450,6 @@ if( isObject( %client.player ) )
 return %client SPC %reason;
 }
 
-function forceClientSpawn(%client,%setupBool)
-{
-%client.race = $Data::Race[%client.GUID];
-%client.sex = $Data::Sex[%client.GUID];
-%client.team = getRaceTeam(%client.race);
-Game.spawnPlayer( %client, false );
-%client.setControlObject(%client.player);
-CloseScoreScreen(%client);
-commandToClient(%client,'HandleScriptedCommand',7);
-commandToClient(%client,'HandleScriptedCommand',3,3000);
-commandToClient(%client,'bottomPrint',"Try not to die.",3);
-
-if (%setupBool)
-applyPlayerSave(%client);
-
-setClientTeam(%client,0); //Has to be after everything else, or the player spawns in the middle of fucking nowhere..
-}
-
-function setClientTeam(%client,%team)
-{
-if (%client.oldTeam $= "")
-%client.oldTeam = %client.team;
-
-%client.team = %team;
-%client.setSensorGroup(%team);
-setTargetSensorGroup(%client.target,%team);
-}
-
 function initGameBots( %mission, %mType )
 {
    echo( "adding bots..." );
@@ -813,14 +785,12 @@ function GameConnection::onConnect( %client, %name, %raceGender, %skin, %voice, 
       case "Bioderm":
          %client.sex = "Male";
          %client.race = "Bioderm";
-      case "Draakan A":
-         %client.sex = "A";
+      case "Draakan Male":
+         %client.sex = "Male";
          %client.race = "Draakan";
-      case "Draakan B":
-         %client.sex = "B";
-         %client.race = "Draakan";
-      case "Draakan C":
-         %client.sex = "C";
+      case "Draakan Female":
+		 // TODO: Make this value matter based on genetics
+         %client.sex = "Male"; 
          %client.race = "Draakan";
       case "Criollos":
          %client.sex = "Male";

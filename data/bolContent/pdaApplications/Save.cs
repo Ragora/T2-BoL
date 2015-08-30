@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Save.cs
 // The PDA Save function for BoL RPG mod.
-// Copyright (c) 2012 The DarkDragonDX
+// Copyright (c) 2012 Robert MacGregor
 //==============================================================================
 
 // Entry Point (called when the client first clicks it)

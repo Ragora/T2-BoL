@@ -1,2 +1,0 @@
-These scripts are the internal functioning of the T2BoL mod. It is recommended you don't touch these and just use the BASIC API
-to make your changes to the game.
