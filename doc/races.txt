@@ -1,0 +1,46 @@
+Intelligence - Determines how well you operate with sophisicated entities such as computer systems
+
+Strength - Determines how much you may attempt to carry on you in any given moment.
+
+Dexterity - Determines how well you can work with your hands. Affects the quality of produces items
+and how long it may take to produce said items. Could possibly work in conjunction with intelligence
+(perhaps for forming sophisicated items -- computer parts used in bots?)
+
+Robot (not playable)---
+	- Least starting intelligence
+	
+	+ Friendly with all; dependent upon owner
+
+Draakan----
+	+ Increased Manueverability
+	+ Flame Breath
+	+ Able to regen health from raw flesh
+	- Notably less HP overall
+	
+	+ Pounce/Maul ability (not in BoL)
+	- Least technologically advanced
+	- Generally Considered beasts
+	- Least starting intelligence (just above robots)
+	
+	* Friendly with Humans, BioDerms -- enemies are Criollos
+	
+Human----
+	- Very low in Numbers (well, spread out)
+	+ Very well advanced in technology
+	+ Decent starting intelligence
+	+ Decent starting strength
+	
+	* Friendly with Draakans -- enemies are BioDerms and Criollos
+
+BioDerm----
+	+ Numbers (can clone)
+	+ Decently technologically advanced (scavenged from Humans)
+	+ Most starting strength-- results in a notable health increase?
+	- Mostly artificially supported; predigested food and such.
+	- Lack of vehicles supplied by the race (they rely on foot assaults)
+	
+	* Friendly with Draakans and Criollos -- enemies are Humans
+Criollos----
+	+ Most advanced in technology
+	+ Most starting intelligence
+	* Friendly with BioDerms -- enemies are Draakans and Humans

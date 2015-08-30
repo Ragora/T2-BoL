@@ -90,8 +90,8 @@ exec("scripts/CreditsGui.cs");
 exec("serverControl.cs");
 
 //Init Shared & Client scripts
-exec("scripts/modScripts/shared/initialise.cs");
-exec("scripts/modScripts/client/initialise.cs");
+exec("scripts/modscripts/shared/initialize.cs");
+exec("scripts/modscripts/client/initialize.cs");
 if (isDemo())
    exec("scripts/DemoEndGui.cs");
 exec("scripts/ChatGui.cs");

@@ -1605,11 +1605,17 @@ $RemapCount++;
 $RemapName[$RemapCount] = "Interact / Use";
 $RemapCmd[$RemapCount] = "InteractWithObject";
 $RemapCount++;
-$RemapName[$RemapCount] = "Icrease Frequency";
-$RemapCmd[$RemapCount] = "IcreaseRadioFrequency";
+$RemapName[$RemapCount] = "Increase Frequency";
+$RemapCmd[$RemapCount] = "IncreaseRadioFrequency";
 $RemapCount++;
 $RemapName[$RemapCount] = "Decrease Frequency";
 $RemapCmd[$RemapCount] = "DecreaseRadioFrequency";
+$RemapCount++;
+$RemapName[$RemapCount] = "Increase Voice";
+$RemapCmd[$RemapCount] = "IncreaseVoiceRange";
+$RemapCount++;
+$RemapName[$RemapCount] = "Decrease Voice";
+$RemapCmd[$RemapCount] = "DecreaseVoiceRange";
 $RemapCount++;
 if ( !isDemo() )
 {

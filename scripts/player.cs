@@ -2064,7 +2064,7 @@ datablock PlayerData(LightMaleBiodermArmor) : LightMaleHumanArmor
 };
 
 //TODO: Balance out the Draakan armors
-datablock PlayerData(LightADraakanArmor) : LightMaleHumanArmor
+datablock PlayerData(LightMaleDraakanArmor) : LightMaleHumanArmor
 {
    shapeFile = "bioderm_light.dts";
    jetEmitter = BiodermArmorJetEmitter;
@@ -2105,91 +2105,6 @@ datablock PlayerData(LightADraakanArmor) : LightMaleHumanArmor
    jumpEnergyDrain = 0;
    minJumpEnergy = 0;
    jumpDelay = 0;
-
-   waterBreathSound = WaterBreathBiodermSound;
-};
-
-datablock PlayerData(LightBDraakanArmor) : LightMaleHumanArmor
-{
-   shapeFile = "bioderm_light.dts";
-   jetEmitter = BiodermArmorJetEmitter;
-   jetEffect =  BiodermArmorJetEffect;
-
-
-   debrisShapeName = "bio_player_debris.dts";
-   debris = BiodermPlayerDebris;
-
-   max[Flamer]   = 1;
-
-   damageScale[$DamageType::Flame] = 0;
-   damageScale[$DamageType::Ground] = 0.06;
-   damageScale[$DamageType::Lava] = 0.009;
-   
-   runForce = 40.25 * 180;
-   runEnergyDrain = 0;
-   minRunEnergy = 0;
-   maxForwardSpeed = 18.7;
-   maxBackwardSpeed = 13.2;
-   maxSideSpeed = 7.7;
-
-   maxUnderwaterForwardSpeed = 5;
-   maxUnderwaterBackwardSpeed = 3;
-   maxUnderwaterSideSpeed = 3;
-
-   recoverDelay = 8;
-   recoverRunForceScale = 0.2;
-
-   jumpForce = 8.35 * 200;
-   jumpEnergyDrain = 0;
-   minJumpEnergy = 0;
-   jumpDelay = 0;
-
-
-   //Foot Prints
-   decalData   = LightBiodermFootprint;
-   decalOffset = 0.3;
-
-   waterBreathSound = WaterBreathBiodermSound;
-};
-
-datablock PlayerData(LightCDraakanArmor) : LightMaleHumanArmor
-{
-   shapeFile = "bioderm_light.dts";
-   jetEmitter = BiodermArmorJetEmitter;
-   jetEffect =  BiodermArmorJetEffect;
-
-
-   debrisShapeName = "bio_player_debris.dts";
-   debris = BiodermPlayerDebris;
-
-   max[Flamer]   = 1;
-
-   damageScale[$DamageType::Flame] = 0;
-   damageScale[$DamageType::Ground] = 0.06;
-   damageScale[$DamageType::Lava] = 0.009;
-
-   runForce = 40.25 * 180;
-   runEnergyDrain = 0;
-   minRunEnergy = 0;
-   maxForwardSpeed = 18.7;
-   maxBackwardSpeed = 13.2;
-   maxSideSpeed = 7.7;
-
-   maxUnderwaterForwardSpeed = 5;
-   maxUnderwaterBackwardSpeed = 3;
-   maxUnderwaterSideSpeed = 3;
-
-   recoverDelay = 8;
-   recoverRunForceScale = 0.2;
-
-   jumpForce = 8.35 * 200;
-   jumpEnergyDrain = 0;
-   minJumpEnergy = 0;
-   jumpDelay = 0;
-
-   //Foot Prints
-   decalData   = LightBiodermFootprint;
-   decalOffset = 0.3;
 
    waterBreathSound = WaterBreathBiodermSound;
 };
@@ -2237,7 +2152,7 @@ datablock PlayerData(MediumMaleBiodermArmor) : MediumMaleHumanArmor
    waterBreathSound = WaterBreathBiodermSound;
 };
 
-datablock PlayerData(MediumADraakanArmor) : MediumMaleHumanArmor
+datablock PlayerData(MediumMaleDraakanArmor) : MediumMaleHumanArmor
 {
    emap = false;
 
@@ -2266,88 +2181,6 @@ datablock PlayerData(MediumADraakanArmor) : MediumMaleHumanArmor
    jumpEnergyDrain = 0;
    minJumpEnergy = 0;
    jumpDelay = 0;
-
-   debrisShapeName = "bio_player_debris.dts";
-   debris = BiodermPlayerDebris;
-
-   //Foot Prints
-   decalData    = HeavyBiodermFootprint;
-   decalOffset  = 0.4;
-
-   waterBreathSound = WaterBreathBiodermSound;
-};
-
-datablock PlayerData(MediumBDraakanArmor) : MediumMaleHumanArmor
-{
-   emap = false;
-
-   shapeFile = "bioderm_medium.dts";
-   jetEmitter = BiodermArmorJetEmitter;
-
-   damageScale[$DamageType::Flame] = 0;
-   damageScale[$DamageType::Ground] = 0.06;
-   damageScale[$DamageType::Lava] = 0.009;
-
-   runForce = 40.25 * 180;
-   runEnergyDrain = 0;
-   minRunEnergy = 0;
-   maxForwardSpeed = 18.7;
-   maxBackwardSpeed = 13.2;
-   maxSideSpeed = 7.7;
-
-   maxUnderwaterForwardSpeed = 5;
-   maxUnderwaterBackwardSpeed = 3;
-   maxUnderwaterSideSpeed = 3;
-
-   recoverDelay = 8;
-   recoverRunForceScale = 0.2;
-
-   jumpForce = 8.35 * 200;
-   jumpEnergyDrain = 0;
-   minJumpEnergy = 0;
-   jumpDelay = 0;
-
-
-   debrisShapeName = "bio_player_debris.dts";
-   debris = BiodermPlayerDebris;
-
-   //Foot Prints
-   decalData    = HeavyBiodermFootprint;
-   decalOffset  = 0.4;
-
-   waterBreathSound = WaterBreathBiodermSound;
-};
-
-datablock PlayerData(MediumCDraakanArmor) : MediumMaleHumanArmor
-{
-   emap = false;
-
-   shapeFile = "bioderm_medium.dts";
-   jetEmitter = BiodermArmorJetEmitter;
-
-   damageScale[$DamageType::Flame] = 0;
-   damageScale[$DamageType::Ground] = 0.06;
-   damageScale[$DamageType::Lava] = 0.009;
-
-   runForce = 40.25 * 180;
-   runEnergyDrain = 0;
-   minRunEnergy = 0;
-   maxForwardSpeed = 18.7;
-   maxBackwardSpeed = 13.2;
-   maxSideSpeed = 7.7;
-
-   maxUnderwaterForwardSpeed = 5;
-   maxUnderwaterBackwardSpeed = 3;
-   maxUnderwaterSideSpeed = 3;
-
-   recoverDelay = 8;
-   recoverRunForceScale = 0.2;
-
-   jumpForce = 8.35 * 200;
-   jumpEnergyDrain = 0;
-   minJumpEnergy = 0;
-   jumpDelay = 0;
-
 
    debrisShapeName = "bio_player_debris.dts";
    debris = BiodermPlayerDebris;
@@ -2401,73 +2234,11 @@ datablock PlayerData(HeavyMaleBiodermArmor) : HeavyMaleHumanArmor
    waterBreathSound = WaterBreathBiodermSound;
 };
 
-datablock PlayerData(HeavyADraakanArmor) : HeavyMaleHumanArmor
+datablock PlayerData(HeavyMaleDraakanArmor) : HeavyMaleHumanArmor
 {
    shapeFile = "bioderm_heavy.dts";
    debrisShapeName = "bio_player_debris.dts";
    debris = BiodermPlayerDebris;
-
-   damageScale[$DamageType::Flame] = 0;
-   damageScale[$DamageType::Ground] = 0.06;
-   damageScale[$DamageType::Lava] = 0.009;
-
-   runForce = 40.25 * 180;
-   runEnergyDrain = 0;
-   minRunEnergy = 0;
-   maxForwardSpeed = 18.7;
-   maxBackwardSpeed = 13.2;
-   maxSideSpeed = 7.7;
-
-   maxUnderwaterForwardSpeed = 5;
-   maxUnderwaterBackwardSpeed = 3;
-   maxUnderwaterSideSpeed = 3;
-
-   recoverDelay = 8;
-   recoverRunForceScale = 0.2;
-
-   jumpForce = 8.35 * 200;
-   jumpEnergyDrain = 0;
-   minJumpEnergy = 0;
-   jumpDelay = 0;
-
-};
-
-datablock PlayerData(HeavyBDraakanArmor) : HeavyMaleHumanArmor
-{
-   shapeFile = "bioderm_heavy.dts";
-   debrisShapeName = "bio_player_debris.dts";
-   debris = BiodermPlayerDebris;
-
-   damageScale[$DamageType::Flame] = 0;
-   damageScale[$DamageType::Ground] = 0.06;
-   damageScale[$DamageType::Lava] = 0.009;
-
-   runForce = 40.25 * 180;
-   runEnergyDrain = 0;
-   minRunEnergy = 0;
-   maxForwardSpeed = 18.7;
-   maxBackwardSpeed = 13.2;
-   maxSideSpeed = 7.7;
-
-   maxUnderwaterForwardSpeed = 5;
-   maxUnderwaterBackwardSpeed = 3;
-   maxUnderwaterSideSpeed = 3;
-
-   recoverDelay = 8;
-   recoverRunForceScale = 0.2;
-
-   jumpForce = 8.35 * 200;
-   jumpEnergyDrain = 0;
-   minJumpEnergy = 0;
-   jumpDelay = 0;
-
-};
-
-datablock PlayerData(HeavyCDraakanArmor) : HeavyMaleHumanArmor
-{
-shapeFile = "bioderm_heavy.dts";
-debrisShapeName = "bio_player_debris.dts";
-debris = BiodermPlayerDebris;
 
    damageScale[$DamageType::Flame] = 0;
    damageScale[$DamageType::Ground] = 0.06;

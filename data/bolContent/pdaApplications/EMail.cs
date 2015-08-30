@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // EMail.cs
 // An E-Mail client for the Birth of Legend RPG Mod.
-// Copyright (c) 2012 The DarkDragonDX
+// Copyright (c) 2012 Robert MacGregor
 //==============================================================================
 
 // Entry Point (called when the client first clicks it)

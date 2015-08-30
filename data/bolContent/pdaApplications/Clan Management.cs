@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Clan Management.cs
 // The clan management system for BoL RPg Mod.
-// Copyright (c) 2012 The DarkDragonDX
+// Copyright (c) 2012 Robert MacGregor
 //==============================================================================
 
 // Entry Point (called when the client first clicks it)

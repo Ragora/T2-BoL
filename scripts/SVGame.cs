@@ -358,98 +358,98 @@ function SVGame::PlayerHelp(%game) //Is called after 2 minutes in each round; te
 
 function SVGame::SpawnAI(%game,%val)
 {
- if (%val && !$Host::ProgressiveMode)
- return;
- 
- if (Game.rounds == 90)
- {
-  messageAll('msgAll',"\c3The Godbot is here! ~wfx/misc/red_alert.wav");
-  for (%i = 0; %i < 6; %i++)
-  {
-  %bot = aiConnectByName("Godbot",2);
-  %bot.setSkillLevel(1);
-  %bot.player.clearInventory();
-  %bot.player.setArmor("TR2Heavy");
-  %bot.player.setInventory("TR2EnergyPack",1,true);
-  %bot.player.setInventory("Disc",1,true);
-  %bot.player.setInventory("DiscAmmo",900,true);
- // %bot.player.setInventory("Chaingun",1,true);
-  //%bot.player.setInventory("ChaingunAmmo",999,true);
-   %bot.player.setInventory("GrenadeLauncher",1,true);
-    %bot.player.setInventory("GrenadeLauncherAmmo",999,true);
-     %bot.player.setInventory("Shocklance",1,true);
-      %bot.player.setInventory("Mortar",1,true);
-       %bot.player.setInventory("MortarAmmo",999,true);
-       %bot.player.use("Disc");
-       %game.botCount = 5;
- hideClient(%bot);
- }
-  return;
- }
- %playerCount = clientGroup.getCount() - 1;
- 
- for (%i = 0; %i < 2 + Game.rounds+1; %i++)
- {
-  %bot = aiConnectByIndex(getRandom(0,$BotProfile::Count),2); //Choose random b0ts by Index
-   //Alright -- this'll make the game a bit harder -- depending on the rounds, the bots will have random armors.
-   %chance = getRandom(1,5 + Game.rounds);
-   %bot.player.clearInventory();
-   
-   if (%chance > 6) //Medium Armor
-   {
-    %bot.player.setArmor("Medium");
-   // %bot.player.setInventory("Chaingun",1,1);
-    //%bot.player.setInventory("ChaingunAmmo",500,1);
-	%bot.player.setInventory("GrenadeLauncher",1,1);
-	%bot.player.setInventory("GrenadeLauncherAmmo",999,1);
-    %bot.player.setInventory("Disc",1,1);
-    %bot.player.setInventory("DiscAmmo",30,1);
-    %bot.player.setInventory("Shoklance",1,1);
-    %bot.player.setInventory("MissileLauncher",1,1);
-    %bot.player.setInventory("MissileLauncherAmmo",50);
-    %bot.player.use("Chaingun");
-   }
-   else if (%chance > 10) //JUGGY
-   {
-    %bot.player.setArmor("Heavy");
-		%bot.player.setInventory("GrenadeLauncher",1,1);
-	%bot.player.setInventory("GrenadeLauncherAmmo",999,1);
-  //  %bot.player.setInventory("Chaingun",1,1);
-  //  %bot.player.setInventory("ChaingunAmmo",500,1);
-    %bot.player.setInventory("Disc",1,1);
-    %bot.player.setInventory("DiscAmmo",30,1);
-    %bot.player.setInventory("Shoklance",1,1);
-    %bot.player.use("Chaingun");
-   }
-   else //Light
-   {
-    %bot.player.setArmor("Light");
-		%bot.player.setInventory("GrenadeLauncher",1,1);
-	%bot.player.setInventory("GrenadeLauncherAmmo",999,1);
-   // %bot.player.setInventory("Chaingun",1,1);
-   // %bot.player.setInventory("ChaingunAmmo",500,1);
-    %bot.player.setInventory("Disc",1,1);
-    %bot.player.setInventory("DiscAmmo",30,1);
-    %bot.player.setInventory("Shoklance",1,1);
-    %bot.player.use("Chaingun");
-   }
-   hideClient(%bot);
-   %random = getRandom(0,%playerCount);
-  // %client = clientGroup.getObject(%random);
-  // %bot.stepEscort(%client.player);
-   %bot.player.setInventory("AmmoPack",1,1);
-   setTeam(%bot,2);
-   %bot.setSkillLevel(99);
-  // %bot.stepEngage(clientGroup.getObject(%random));
- }
- 
- if ($Host::ProgressiveMode && %val)
- {
- %game.rounds++; //So we increment every time -- I should put a limit to the bots..
- Game.BotWave = Game.schedule(180000,"SpawnAI",true);
- }
- 
-messageAll('MsgSPCurrentObjective2',"",'Number of bots: %1',Game.botCount);
+	if (%val && !$Host::ProgressiveMode)
+	return;
+	 
+	if (Game.rounds == 90)
+	{
+		messageAll('msgAll',"\c3The Godbot is here! ~wfx/misc/red_alert.wav");
+		for (%i = 0; %i < 6; %i++)
+		{
+			%bot = aiConnectByName("Godbot",2);
+			%bot.setSkillLevel(1);
+			%bot.player.clearInventory();
+			%bot.player.setArmor("TR2Heavy");
+			%bot.player.setInventory("TR2EnergyPack",1,true);
+			%bot.player.setInventory("Disc",1,true);
+			%bot.player.setInventory("DiscAmmo",900,true);
+			// %bot.player.setInventory("Chaingun",1,true);
+			//%bot.player.setInventory("ChaingunAmmo",999,true);
+			%bot.player.setInventory("GrenadeLauncher",1,true);
+			%bot.player.setInventory("GrenadeLauncherAmmo",999,true);
+			%bot.player.setInventory("Shocklance",1,true);
+			%bot.player.setInventory("Mortar",1,true);
+			%bot.player.setInventory("MortarAmmo",999,true);
+			%bot.player.use("Disc");
+			%game.botCount = 5;
+			hideClient(%bot);
+		}
+		return;
+	}
+	%playerCount = clientGroup.getCount() - 1;
+	 
+	for (%i = 0; %i < 2 + Game.rounds+1; %i++)
+	{
+		%bot = aiConnectByIndex(getRandom(0,$BotProfile::Count),2); //Choose random b0ts by Index
+		//Alright -- this'll make the game a bit harder -- depending on the rounds, the bots will have random armors.
+		%chance = getRandom(1,5 + Game.rounds);
+		%bot.player.clearInventory();
+	   
+		if (%chance > 6) //Medium Armor
+		{
+			%bot.player.setArmor("Medium");
+			// %bot.player.setInventory("Chaingun",1,1);
+			//%bot.player.setInventory("ChaingunAmmo",500,1);
+			%bot.player.setInventory("GrenadeLauncher",1,1);
+			%bot.player.setInventory("GrenadeLauncherAmmo",999,1);
+			%bot.player.setInventory("Disc",1,1);
+			%bot.player.setInventory("DiscAmmo",30,1);
+			%bot.player.setInventory("Shoklance",1,1);
+			%bot.player.setInventory("MissileLauncher",1,1);
+			%bot.player.setInventory("MissileLauncherAmmo",50);
+			%bot.player.use("Chaingun");
+		}
+		else if (%chance > 10) //JUGGY
+		{
+			%bot.player.setArmor("Heavy");
+			%bot.player.setInventory("GrenadeLauncher",1,1);
+			%bot.player.setInventory("GrenadeLauncherAmmo",999,1);
+			//  %bot.player.setInventory("Chaingun",1,1);
+			//  %bot.player.setInventory("ChaingunAmmo",500,1);
+			%bot.player.setInventory("Disc",1,1);
+			%bot.player.setInventory("DiscAmmo",30,1);
+			%bot.player.setInventory("Shoklance",1,1);
+			%bot.player.use("Chaingun");
+		}
+		else //Light
+		{
+			%bot.player.setArmor("Light");
+			%bot.player.setInventory("GrenadeLauncher",1,1);
+			%bot.player.setInventory("GrenadeLauncherAmmo",999,1);
+			// %bot.player.setInventory("Chaingun",1,1);
+			// %bot.player.setInventory("ChaingunAmmo",500,1);
+			%bot.player.setInventory("Disc",1,1);
+			%bot.player.setInventory("DiscAmmo",30,1);
+			%bot.player.setInventory("Shoklance",1,1);
+			%bot.player.use("Chaingun");
+			}
+			hideClient(%bot);
+			%random = getRandom(0,%playerCount);
+			// %client = clientGroup.getObject(%random);
+			// %bot.stepEscort(%client.player);
+			%bot.player.setInventory("AmmoPack",1,1);
+			setTeam(%bot,2);
+			%bot.setSkillLevel(99);
+			// %bot.stepEngage(clientGroup.getObject(%random));
+		}
+	 
+	if ($Host::ProgressiveMode && %val)
+	{
+	%game.rounds++; //So we increment every time -- I should put a limit to the bots..
+	Game.BotWave = Game.schedule(180000,"SpawnAI",true);
+	}
+	 
+	messageAll('MsgSPCurrentObjective2',"",'Number of bots: %1',Game.botCount);
 }
 
 function SVGame::allowsProtectedStatics(%game)

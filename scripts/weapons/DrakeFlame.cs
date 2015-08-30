@@ -280,7 +280,7 @@ if(!isobject(%obj) || %obj.client.race $= "draakan" || %obj.getclassname() !$= "
 return;
 }
 
-if (%obj.client.shouldscream $="") //Used for bots..
+if (%obj.client.shouldscream $="" && %obj.client.isAIControlled()) //Used for bots..
 %obj.client.shouldscream = true;
 
 if (%obj.client.shouldscream)

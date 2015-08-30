@@ -261,22 +261,7 @@ function chatMessageTeam( %sender, %team, %msgString, %a1, %a2, %a3, %a4, %a5, %
       return;
       
  if ($CurrentMissionType $= "RPG")
- {
-  if (!%sender.hasRadio)
-  {
-   messageClient(%sender,'msgNoRadio',"\c3You must have a radio.");
-   return;
-  }
-  
-  %count = ClientGroup.getCount();
-   for ( %i = 0; %i < %count; %i++ )
-   {
-      %obj = ClientGroup.getObject( %i );
-      if ( %obj.team == %sender.team )
-        messageClient(%obj,'msgClient',"\c3"@%sender.namebase@" (1): "@%a2@" ~wfx/misc/static.wav");
-         //chatMessageClient( %obj, %sender, %sender.voiceTag, %sender.voicePitch, %msgString, %a1, %a2, %a3, %a4, %a5, %a6, %a7, %a8, %a9, %a10 );
-   }
- }
+	radioChatMessageTeam(%sender, %team, %msgString, %a1, %a2, %a3, %a4, %a5, %a6, %a7, %a8, %a9, %a10);
  else
  {
    %count = ClientGroup.getCount();
@@ -311,19 +296,7 @@ function chatMessageAll( %sender, %msgString, %a1, %a2, %a3, %a4, %a5, %a6, %a7,
    }
 
    if ($CurrentMissionType $= "RPG" && !$Host::GlobalChat)
-   {
-   %count = MissionCleanup.getCount();
-    for (%i = 0; %i < %count; %i++)
-    {
-     %obj = MissionCleanup.getObject(%i);
-      if (%obj.getClassName() $= "Player")
-      {
-       %dist = vectorDist(%sender.player.getPosition(),%obj.getPosition());
-       if (%dist < 200)
-       chatMessageClient( %obj.client, %sender, %sender.voiceTag, %sender.voicePitch, %msgString, addTaggedString("(Radius - 200)" SPC getTaggedString(%a1)), %a2, %a3, %a4, %a5, %a6, %a7, %a8, %a9, %a10 );
-      }
-    }
-   }
+		rangedChatMessageAll(%sender, %msgString, %a1, %a2, %a3, %a4, %a5, %a6, %a7, %c8, %a9, %a10);
    else
    {
    %count = ClientGroup.getCount();

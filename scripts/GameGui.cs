@@ -717,7 +717,8 @@ function JoinGame(%address)
 	echo("Joining Server " @ %address);
 	%playerPref = $pref::Player[$pref::Player::Current];
 	%playerName = getField( %playerPref, 0 );
-	%playerRaceGender = strReplace(getField( %playerPref, 1 ),"Type A","A");
+	%playerRaceGender = getField( %playerPref, 1 );
+	error(%playerPref, 1);
 	%playerSkin = getField( %playerPref, 2 );
 	%playerVoice = getField( %playerPref, 3 );
 	%playerVoicePitch = getField( %playerPref, 4 );
@@ -1817,10 +1818,9 @@ function GMW_RaceGenderPopup::fillList( %this )
 	%this.add( "Human Male", 0 );
 	%this.add( "Human Female", 1 );
 	%this.add( "Bioderm", 2 );
-    %this.add( "Draakan Type A", 3 );
-    %this.add( "Draakan Type B", 4 );
-    %this.add( "Draakan Type C", 5 );
-    %this.add( "Criollos", 6 );
+    %this.add( "Draakan Male", 3 );
+    %this.add( "Draakan Female", 4 );
+    %this.add( "Criollos", 5 );
 }
 
 //------------------------------------------------------------------------------
@@ -1928,7 +1928,7 @@ function GMW_SkinPopup::fillList( %this, %raceGender )
          %pattern = ".lfemale.png";
       case 2:  // Bioderm
          %pattern = ".lbioderm.png";
-      case 3 or 4 or 5 or 6:  //Draakan & Criollos
+      case 3 or 4 or 5:  //Draakan & Criollos
          %pattern = ".lbioderm.png";
    }
 
@@ -2032,19 +2032,15 @@ function GMW_VoicePopup::fillList( %this, %raceGender )
 			for ( %i = 0; %i < $DermVoiceCount; %i++ )
 				%this.add( $DermVoiceName[%i], %i );
     
-        case 3: // Draakan Type A
+        case 3: // Male Draakan
 			for ( %i = 0; %i < $DermVoiceCount; %i++ )
 				%this.add( $DermVoiceName[%i], %i );
     
-        case 4: // Draakan Type B
+        case 4: // Female Draakan
 			for ( %i = 0; %i < $DermVoiceCount; %i++ )
 				%this.add( $DermVoiceName[%i], %i );
     
-        case 5: // Draakan Type C
-			for ( %i = 0; %i < $DermVoiceCount; %i++ )
-				%this.add( $DermVoiceName[%i], %i );
-    
-        case 6: // Criollos
+        case 5: // Criollos
 			for ( %i = 0; %i < $DermVoiceCount; %i++ )
 				%this.add( $DermVoiceName[%i], %i );
 	}
@@ -2062,7 +2058,6 @@ function GMW_VoicePopup::onSelect( %this, %id, %text )
         case 3: %base = "Derm";
         case 4: %base = "Derm";
         case 5: %base = "Derm";
-        case 6: %base = "Derm";
 	}
 
 	$pref::Player[$pref::Player::Current] = setField( $pref::Player[$pref::Player::Current], 3, %base @ ( %id + 1 ) );
@@ -2095,7 +2090,6 @@ function GMW_VoicePopup::test( %this )
   		case 3: %base = "Derm";
   		case 4: %base = "Derm";
   		case 5: %base = "Derm";
-        case 6: %base = "Derm";
 	}
 
    GMW_VoiceTestBtn.setActive( false );
