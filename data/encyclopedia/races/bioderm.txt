@@ -1,0 +1,10 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Race: BioDerm<spop>
+<spush><font:Univers:15>
+These humans are hard to catch off-guard. Rrrh, so be it! We’ll crush them the old-fashioned way -- brute force!
+  -- from a Horde Maul tactical briefing
+<spop>
+
+<just:center><bitmap:twb/twb_bioderm_light><sbreak>
+
+The Bioderms are an artificially created workrace. Sometimes used in combat, a great number of Derms rebelled against the Human race.
+But in 3956 CE, six years after the turning point of the war, the BioDerms were given the right to be considered their own race.

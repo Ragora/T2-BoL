@@ -1,4 +1,0 @@
-;Prices work in whole US dollars
-;This is just for store intergration
-;Anything without 'display' set will show as the db name in browser
-

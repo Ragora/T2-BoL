@@ -1,0 +1,6 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Planet: Earth<spop>
+<spush><font:Univers:15>
+Considered the 'celestial' planet, Earth is great place for vacations.
+<spop>
+
+<just:center><bitmap:Earth><sbreak>

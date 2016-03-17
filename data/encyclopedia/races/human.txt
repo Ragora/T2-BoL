@@ -1,0 +1,9 @@
+<spush><just:center><color:00dc00><font:univers condensed:25>Race: Human<spop>
+<spush><font:Univers:15>
+One small step for man. One giant leap for mankind.
+  -- Louis Armstrong, the Moon Landing
+<spop>
+
+<just:center><bitmap:twb/twb_BE_MLight><sbreak>
+
+The Humans have tried to find extraterrestial life since their Modern ages, but with no luck. However in 2578 CE, the song "Accross the Universe" that is broadcasted as far into space as possible by NASA was heard and interpreted as an SOS signal. A large battleShip then landed on Earth, carrying a large amount of <a:select-Races-Draakan>Draakan</a> footsoldiers. The misunderstanding was then worked out. Before the <a:select-Races-Draakan>Draakans</a> left, they helped the Humans upgrade their technology.

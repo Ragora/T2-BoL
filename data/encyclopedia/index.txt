@@ -1,0 +1,5 @@
+<just:center>Select a category from the dropdown menu on my left.
+Then select an article you wish to read about.
+
+Underlined text such as <a:select-Races-BioDerm>this</a> are references.
+These references, if clicked on will send you to the subject it is talking about.
