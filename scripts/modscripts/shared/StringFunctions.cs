@@ -147,7 +147,7 @@ function getSubStrPos(%string,%str,%num)
 	{
 		%curPos = %i;
 		%sub = getSubStr(%string,%i,1);
- 
+
 		if (%sub $= %str)
 		{
 			if (%subC == %num)
@@ -168,7 +168,7 @@ function strWhite(%string, %whiteList, %char)
 		for (%h = 0; %h < %charLen; %h++)
 		{
 			%whiteSeg = getSubStr(%whiteList, %i, %charLen);
-			
+
 		}
 	return false;
 }
@@ -180,6 +180,19 @@ function getFileNameFromString(%string)
 		return %string;
 	else
 		return getSubStr(%string,getSubStrPos(%string, "/", getSubStrOccurances(%string, "/")-1)+1,strLen(%string));
+}
+
+//------------------------------------------------------------------------------
+function subWordCapitalize(%string)
+{
+	%current = "";
+	for (%i = 0; %i < getWordCount(%string); %i++)
+	{
+		%word = getWord(%string, %i);
+		%word = strUpr(getSubStr(%word, 0, 1)) @ getSubStr(%word, 1, strLen(%word));
+		%current = %current SPC %word;
+	}
+	return trim(%current);
 }
 
 //-------------------------------------------------------------------------------

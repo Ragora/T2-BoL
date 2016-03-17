@@ -20,9 +20,9 @@ function BasicDataParser::load(%this, %file)
 		%this.filesLoaded = 0;
 	if (%this.blockEntryCount == "")
 		%this.blockEntryCount = 0;
-	if (%this.blockInstances == "") 
+	if (%this.blockInstances == "")
 		%this.blockInstances = 0;
-	
+
 	%currentSeconds = formatTimeString("ss");
 	// Check to see if the data is valid (returns false if we tried to load a nonexistent file)
 	if (!isFile(%file))
@@ -40,11 +40,11 @@ function BasicDataParser::load(%this, %file)
 	%this.files[%this.filesLoaded] = %file;
 	%this.fileIndex[%file] = %this.filesLoaded;
 	%this.filesLoaded++;
-	
+
 	// Load the file into memory (function is from fileProcessing.cs)
 	%fileData = strReplace(stripChars(getFileBuffer(%file),"\t"),"\n","\t");
 	%lineCount = getFieldCount(%fileData);
-	
+
 	%isProcessingBlock = false; // Used to set processing mode
 	%currentBlock = 0;
 	%hadError = false;
@@ -55,13 +55,13 @@ function BasicDataParser::load(%this, %file)
 		// Check to see if this line contains a block definition or not
 		%openingBlock = strStr(%currentLine, "[");
 		%closingBlock = strStr(%currentLine, "]");
-		
-		// If we have a block definition, it should be against left margin 
+
+		// If we have a block definition, it should be against left margin
 		if (%openingBlock == 0 && %closingBlock > 0 && !%isProcessingBlock)
 		{
 			%isProcessingBlock = true;
 			%blockName = getSubStr(%currentLine,%openingBlock+1,%closingBlock-1);
-			
+
 			if (%this.blockInstances[%blockName] == "")
 			{
 				%this.blockInstances[%blockName] = 0;
@@ -71,8 +71,8 @@ function BasicDataParser::load(%this, %file)
 			// Create the array to store our block data
 			%currentBlock = Array.create();
 			%currentBlock.Name = %blockName;
-			%currentBlock.File = %file; 
-			
+			%currentBlock.File = %file;
+
 			%this.blocks[%blockName,%this.blockInstances] = %currentBlock;
 			%this.blockInstances[%blockName]++;
 			%this.blockInstances++;
@@ -84,7 +84,7 @@ function BasicDataParser::load(%this, %file)
 			error("basicDataStorage.cs: Error loading file "@ %file @ ", block spacing error.");
 			return false;
 		}
-		
+
 		// If we're processing the actual block
 		if (%isProcessingBlock)
 		{
@@ -105,7 +105,7 @@ function BasicDataParser::load(%this, %file)
 				}
 				// Note: I got lazy here, just don't have semicolons in your data entries..
 				%semiPos = strStr(%currentLine,";");
-				if (%semiPos == -1 || getSubStrOccurance(%currentLine,";") > 1)
+				if (%semiPos == -1 || getSubStrOccurances(%currentLine,";") > 1)
 				{
 					error("basicDataStorage.cs: Unable to read entry for block" SPC %currentBlock.Name @ " in file" SPC %file @ "!");
 					%isProcessingBlock = false;
@@ -118,9 +118,9 @@ function BasicDataParser::load(%this, %file)
 				%currentBlock.setElement(%entryName,%entryValue);
 			}
 		}
-		
+
 	}
-	
+
 	if (!%hadError)
 		warn("basicDataStorage.cs: Successfully loaded file" SPC %file SPC "in " @ formatTimeString("ss") - %currentSeconds SPC "seconds.");
 	return !%hadError;
@@ -140,7 +140,7 @@ function BasicDataParser::unload(%this, %file)
 		error("basicDataStorage.cs: Attempted to unload non-loaded data file " @ %file @ "!");
 		return false;
 	}
-	
+
 	// Unload any data associated with this file now
 	%removed = "";
 	for (%i = 0; %i < %this.blockEntryCount; %i++)
@@ -153,14 +153,14 @@ function BasicDataParser::unload(%this, %file)
 				%this.blocks[%name, %h] = "";
 				%this.blockEntry[%i] = "";
 				%removed = trim(%removed SPC %i);
-					
+
 				if (%this.blockInstances[%name] == 1)
 					%this.blockInstances[%name] = "";
 				else
 					%this.blockInstances[%name]--;
 			}
 	}
-	
+
 	// Iterate through our block entries and correct the imbalance
 	for (%i = 0; %i < getWordCount(%removed); %i++)
 	{
@@ -168,7 +168,7 @@ function BasicDataParser::unload(%this, %file)
 			%this.blockEntry[%h-%i] = %this.blockEntry[%h+1];
 		%this.blockEntryCount--;
 	}
-	
+
 	// Now remove the file entry
 	for (%i = %this.fileIndex[%file]; %i < %this.filesLoaded; %i++)
 		if (%i != %this.filesLoaded-1)
@@ -181,7 +181,7 @@ function BasicDataParser::unload(%this, %file)
 			%this.fileIndex[%file] = "";
 			%this.files[%i] = "";
 		}
-	
+
 	// Decrement the files loaded count and return true
 	%this.filesLoaded--;
 	return true;
@@ -211,7 +211,7 @@ function BasicDataParser::count(%this, %block)
 // Return: True is always returned from this function.
 //==============================================================================
 function BasicDataParser::empty(%this)
-{	
+{
 	// Iterate through our block entries and destroy them
 	for (%i = 0; %i < %this.blockEntryCount; %i++)
 	{
@@ -224,19 +224,19 @@ function BasicDataParser::empty(%this)
 		%this.blockInstances[%name] = "";
 		%this.blockEntry[%i] = "";
 	}
-	
+
 	// Remove the files loaded entries now
 	for (%i = 0; %i < %this.filesLoaded; %i++)
 	{
 		%this.fileIndex[%this.files[%i]] = "";
 		%this.files[%i] = "";
 	}
-	
+
 	// Reset some variables to 0 and return true
 	%this.filesLoaded = 0;
 	%this.blockInstances = 0;
 	%this.blockEntryCount = 0;
-	
+
 	return true;
 }
 
@@ -271,6 +271,6 @@ function BasicDataParser::get(%this, %block, %occurance)
 	if (%this.count(%block) == 1) return %this.blocks[%block, 0];
 	// Otherwise we use %occurance to return the specific index
 	else if (%occurance >= 0 && %occurance <= %this.count(%block)) return %this.blocks[%block, %occurance];
-	
+
 	return false;
 }
