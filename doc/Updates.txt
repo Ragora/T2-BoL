@@ -4,6 +4,34 @@ Try not to fry your brain.
 *******************************************
 
 [Dark Dragon DX]
+Date: Thursday, June 6th, 2013
+Scripts: scripts/RPGBrowserGUI.cs, data/encyclopedia, data/game/
+Changes:
+-The Encyclopedia now reads .txt files from data/encyclopedia
+-Data files under data/game have been renamed from .txt to .cfg
+Description:
+-This is for better organisation.
+-The .cfg file extension makes more sense for these files as they're more akin to configuration files.
+
+[Dark Dragon DX]
+Date: Wednesday, June 5th, 2013
+Scripts: scripts/SVGame.cs, data/
+Changes:
+-Survival gamemode now loads preferences from prefs/survival.cfg
+-Moved rpgPreferences.txt to prefs/rpg.cfg
+Description:
+-Easy adjustible settings are now found under prefs/
+-Foresight for when the RPG gamemode loads from rpg.cfg.
+
+[Dark Dragon DX]
+Date: Wednesday, June 5th, 2013
+Scripts: scripts/TrainingGUI.cs, data/campaigns
+Changes:
+-Campaign description files are now using the .cfg file extension.
+Description;
+-The files used to have .dat or .txt, this wasn't quite a good idea.
+
+[Dark Dragon DX]
 Date: Tuesday, September 7th, 2010
 Scripts: scripts/creditsGUI.cs, creditsText.cs, creditsText_default.cs, data/creditsText.txt
 Changes:
