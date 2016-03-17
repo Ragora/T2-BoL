@@ -22,14 +22,14 @@ package SVGame
 		messageAll('MsgSystemClock', "", (%secondsLeft / 60), %time);
 		return true;
 	}
- 
+
 	function notifyMatchEnd(%time){ return true; } //Survival has NO end
- 
-	
+
+
 	function Disconnect() //Package this function so we can disable the schedules on disconnect
 	{
 		parent::Disconnect();
-		
+
 		cancel(Game.helper);
 		cancel(Game.roundStart);
 		cancel(Game.roundMessage[0]);
@@ -48,7 +48,7 @@ function SVGame::initGameVars(%game)
 	%game.SCORE_PER_KILL = 1;
 	%game.SCORE_PER_DEATH = -1;
 	%game.SCORE_PER_SUICIDE = -1;
-	   
+
 	//SV Vars
 	%game.rounds = 1;
 	%game.playerCount = 0;
@@ -56,9 +56,9 @@ function SVGame::initGameVars(%game)
 	%game.shouldSpawn = 0;
 	%game.start = 0;
 	%game.AIWon = 0;
-	   
+
 	%prefs = new ScriptObject(){ class = "BasicDataParser"; };
-	%prefs.load("prefs/Survival.conf");
+	%prefs.load("prefs/survival.cfg");
 	%config = %prefs.get("Config",0);
 	%area = %prefs.get("MissionArea",0);
 
@@ -73,7 +73,7 @@ function SVGame::initGameVars(%game)
 	%game.hintTimeMS = %config.element("hintTimeMS");
 	%game.allowSetup = %config.element("allowSetup");
 	%game.setupTimeMS = %config.element("setupTimeMS");
-		   
+
 	%prefs.empty();
 	%prefs.delete();
 	%area.empty();
@@ -154,12 +154,12 @@ function SVGame::lockDeadClients(%game)
 function SVGame::startMatch(%game)
 {
 	DefaultGame::startMatch(%game);
-	   
+
 	if (!$Host::ProgressiveMode)
 		messageAll('MsgSystemClock',"\c2The first round will start in one minute.",1,60000);
 	else
 		messageAll('MsgSystemClock',"\c2The attack will start in one minute!",1,60000);
-	   
+
 	Game.roundMessage[0] = schedule(50000,0,"messageAll",'msgAll',"\c2Round starts in ten seconds.~wfx/misc/hunters_10.wav");
 	Game.roundMessage[1] = schedule(55000,0,"messageAll",'msgAll',"\c2Round starts in five seconds.~wfx/misc/hunters_5.wav");
 	Game.roundMessage[2] = schedule(56000,0,"messageAll",'msgAll',"\c2Round starts in four seconds.~wfx/misc/hunters_4.wav");
@@ -196,7 +196,7 @@ function SVGame::onClientKilled(%game, %clVictim, %clKiller, %damageType, %imple
 {
 	cancel(%clVictim.player.alertThread);
 	DefaultGame::onClientKilled(%game, %clVictim, %clKiller, %damageType, %implement, %damageLoc);
-   
+
 	if (IsObject(%clVictim) && !%clVictim.isAIControlled())
 	{
 		%game.playerCount--; //May be someone switching to observer
@@ -204,7 +204,7 @@ function SVGame::onClientKilled(%game, %clVictim, %clKiller, %damageType, %imple
 			%clVictim.isDead = true;
 		%clVictim.streak = 0; //Moved from SVGame::CheckRounds to fix .streak being reset for some reason
 	}
-    
+
 	if (%game.playerCount <= 0 && %game.start)
 	{
 		messageAll('MsgSystemClock',"\c2Round "@%game.rounds@" belongs to the Artificial Intelligance! The game will now restart back at round 1. ~wfx/misc/flag_return.wav",1,60000);
@@ -222,7 +222,7 @@ function SVGame::onClientKilled(%game, %clVictim, %clKiller, %damageType, %imple
 		Game.roundStart = Game.schedule(60000,"RoundStart");
 		//disconnectAllBots();
 		Game.freeDeadClients();
-			
+
 		%bots = Array.create();
 		%count = HiddenClientGroup.getCount();
 		for (%i = 0; %i < %count; %i++)
@@ -231,8 +231,8 @@ function SVGame::onClientKilled(%game, %clVictim, %clKiller, %damageType, %imple
 			if (%cl.isAIControlled())
 				%bots.setElement(%i, %cl);
 		}
-		
-		
+
+
 		// For the lulz
 		%damageCount = 8;
 		%damageType[0] = $DamageType::Suicide;
@@ -243,7 +243,7 @@ function SVGame::onClientKilled(%game, %clVictim, %clKiller, %damageType, %imple
 		%damageType[5] = $DamageType::ForceFieldPowerup;
 		%damageType[6] = $DamageType::Lightning;
 		%damageType[7] = $DamageType::NexusCamping;
-		
+
 		// Now to kill them
 		for (%i = 0; %i < %count; %i++)
 		{
@@ -360,7 +360,7 @@ function SVGame::SpawnAI(%game,%val)
 {
 	if (%val && !$Host::ProgressiveMode)
 	return;
-	 
+
 	if (Game.rounds == 90)
 	{
 		messageAll('msgAll',"\c3The Godbot is here! ~wfx/misc/red_alert.wav");
@@ -387,14 +387,14 @@ function SVGame::SpawnAI(%game,%val)
 		return;
 	}
 	%playerCount = clientGroup.getCount() - 1;
-	 
+
 	for (%i = 0; %i < 2 + Game.rounds+1; %i++)
 	{
 		%bot = aiConnectByIndex(getRandom(0,$BotProfile::Count),2); //Choose random b0ts by Index
 		//Alright -- this'll make the game a bit harder -- depending on the rounds, the bots will have random armors.
 		%chance = getRandom(1,5 + Game.rounds);
 		%bot.player.clearInventory();
-	   
+
 		if (%chance > 6) //Medium Armor
 		{
 			%bot.player.setArmor("Medium");
@@ -442,13 +442,13 @@ function SVGame::SpawnAI(%game,%val)
 			%bot.setSkillLevel(99);
 			// %bot.stepEngage(clientGroup.getObject(%random));
 		}
-	 
+
 	if ($Host::ProgressiveMode && %val)
 	{
 	%game.rounds++; //So we increment every time -- I should put a limit to the bots..
 	Game.BotWave = Game.schedule(180000,"SpawnAI",true);
 	}
-	 
+
 	messageAll('MsgSPCurrentObjective2',"",'Number of bots: %1',Game.botCount);
 }
 
@@ -469,13 +469,13 @@ function SVGame::equip(%game, %player)
 	%player.setInventory("DiscAmmo", 15);
 	%player.setInventory("TargetingLaser", 1);
 	%player.weaponCount = 1;
-	   
+
 	if (%player.client.race $= "Draakan") //Also defined in DefaultGame.cs, but this overrides it.
 		%player.setInventory(Flamer,1);
 
 	// do we want to give players a disc launcher instead? GJL: Yes we do!
 	%player.use("Disc");
-	
+
 	return true;
 }
 
@@ -492,7 +492,7 @@ function SVGame::pickPlayerSpawn(%game, %client, %respawn)
 function SVGame::clientJoinTeam( %game, %client, %team, %respawn )
 {
 	%game.assignClientTeam( %client );
-	   
+
 	// Spawn the player:
 	%game.spawnPlayer( %client, %respawn );
 	return true;
@@ -510,13 +510,13 @@ function SVGame::clientMissionDropReady(%game, %client)
 {
 	messageClient(%client, 'MsgClientReady',"", "SinglePlayerGame"); //Force the client to set up the SP game objective HUD
 	%game.resetScore(%client);
-	   
+
 	//Setup the client's objective hud
 	messageClient(%client,'MsgSPCurrentObjective1',"",'Current round: 1');
 	messageClient(%client,'MsgSPCurrentObjective2',"",'Number of bots: 0'); //Should update as soon as our player joins
 
-	messageClient(%client, 'MsgMissionDropInfo', '\c0You are in mission %1 (%2).', $MissionDisplayName, $MissionTypeDisplayName, $ServerName ); 
-	   
+	messageClient(%client, 'MsgMissionDropInfo', '\c0You are in mission %1 (%2).', $MissionDisplayName, $MissionTypeDisplayName, $ServerName );
+
 	DefaultGame::clientMissionDropReady(%game, %client);
 	return true;
 }
@@ -565,9 +565,9 @@ function SVGame::updateKillScores(%game, %clVictim, %clKiller, %damageType, %imp
 		%game.awardScoreKill(%clKiller);
 		messageClient(%clKiller, 'MsgDMKill', "", %clKiller.kills);
 		%game.awardScoreDeath(%clVictim);
-	}       
+	}
 	else if (%game.testSuicide(%clVictim, %clKiller, %damageType))  //otherwise test for suicide
-		%game.awardScoreSuicide(%clVictim);     
+		%game.awardScoreSuicide(%clVictim);
 	return true;
 }
 
@@ -612,7 +612,7 @@ function SVGame::gameOver(%game)
 	Game.GameEnded = true;
 
 	messageAll('MsgGameOver', "Match has ended.~wvoice/announcer/ann.gameover.wav" );
-	   
+
 	//cancel the schedules..
 	cancel(Game.helper);
 	cancel(Game.roundStart);
@@ -626,7 +626,7 @@ function SVGame::gameOver(%game)
 
 	cancel(%game.timeThread);
 	messageAll('MsgClearObjHud', "");
-	for(%i = 0; %i < ClientGroup.getCount(); %i ++) 
+	for(%i = 0; %i < ClientGroup.getCount(); %i ++)
 	{
 		%client = ClientGroup.getObject(%i);
 		%game.resetScore(%client);
@@ -636,7 +636,7 @@ function SVGame::gameOver(%game)
 
 function SVGame::enterMissionArea(%game, %playerData, %player)
 {
-	%player.client.outOfBounds = false; 
+	%player.client.outOfBounds = false;
 	messageClient(%player.client, 'EnterMissionArea', '\c1You are back in the mission area.');
 	logEcho(%player.client.nameBase@" (pl "@%player@"/cl "@%player.client@") entered mission area");
 	cancel(%player.alertThread);
@@ -680,7 +680,7 @@ function SVGame::updateScoreHud(%game, %client, %tag)
 {
 	// Clear the header:
 	messageClient( %client, 'SetScoreHudHeader', "", "" );
-	   
+
 	if ($Data::Rounds[%client.GUID,$MissionName] $= "")
 		$Data::Rounds[%client.GUID,$MissionName] = 0;
 

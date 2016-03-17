@@ -42,8 +42,8 @@ function BrowserDoSave() //A good ol' converter for browser files. Should work o
 	%category = RPG_Category.getValue();
 	%file.openForWrite("savedDocs/" @ %item @ ".txt");
 	%read = new fileObject();
-	%read.openForRead("Data/Browser/" @ %category @ "/" @ %item @ ".txt");
-  
+	%read.openForRead("data/encyclopedia/" @ %category @ "/" @ %item @ ".txt");
+
 	%skip = false;
 	while (!%read.isEOF())
 	{
@@ -51,13 +51,13 @@ function BrowserDoSave() //A good ol' converter for browser files. Should work o
 		%lineTest = strLwr(strReplace(%line," ","")); //strip spaces to test for tags to skip
 		%spush = getSubStr(%lineTest,0,7);
 		%just = getSubStr(%lineTest,0,6);
-    
+
 		//Ok.. we need to cipher out some useless information before we're through
 		if (%just !$= "<just:")
 		{
 			if (%spush $= "<spush>")
 			%skip = true;
-		 
+
 			if (%skip == true) //Try to find our <spop> tag
 			{
 				%search = strStr(%lineTest,"<spop>");
@@ -113,7 +113,7 @@ function BrowserDoSave() //A good ol' converter for browser files. Should work o
 			}
 		}
 	}
-	
+
 	//Detach our file objects (scripts/fileProcessing.cs)
 	%file.detach();
 	%read.detach();
@@ -192,18 +192,18 @@ function RPG_BrowserPane::Refresh(%this,%val)
 	%text = RPG_Category.getText();
 
 	if (%text $= "Select Category" || %text $= "")
-		return RPG_Text.readFromFile("Data/Browser/Introduction.txt");
+		return RPG_Text.readFromFile("data/encyclopedia/index.txt");
 
 	RPG_ItemList.clear();
 
-	%path = "Data/Game/" @ %text @ "/*.des";
-	%count = 0;
+    %count = 0;
+	%path = "data/encyclopedia/" @ %text @ "/*.txt";
 	for( %file = findFirstFile( %path ); %file !$= ""; %file = findNextFile( %path ) )
 	{
-		%name = getFileNameFromString(strReplace(%file,".des","")); //Get the fileName from our string (used in the item List)
-		if (%name !$= "Introduction")
+		%name = getFileNameFromString(strReplace(%file,".txt","")); //Get the fileName from our string (used in the item List)
+		if (%name !$= "index")
 		{
-			RPG_ItemList.addRow(%count, %name);
+            RPG_ItemList.addRow(%count, subWordCapitalize(%name));
 			%count++;
 		}
 	}
@@ -261,16 +261,19 @@ function RPG_TabView::onSelect( %this, %id, %text )
 //------------------------------------------------------------------------------
 function RPG_Category::PopulateList() //Listing is now alphabatized
 {
-	RPG_Category.clear();
+    RPG_Category.clear();
 
-	%file = "Data/Game/encyclopediaData.txt";
+	%file = "data/encyclopedia/encyclopedia.conf";
 
-	%count = getBlockData(%file,"Encyclopedia",1,"categoryCount");
+	%parser = new ScriptObject(){ class = "BasicDataParser"; };
+	%parser.load(%file);
+	%block = %parser.get("Config", 0);
+	%count = %block.element("EntryCount");
 	RPG_Category.count = %count;
 
 	for (%i = 0; %i < %count; %i++)
 	{
-		%category = getBlockData(%file,"Encyclopedia",1,"category" @ %i);
+		%category = %block.element("Entry" @ %i);
 		RPG_Category.add(%category,%i);
 	}
 
@@ -279,7 +282,11 @@ function RPG_Category::PopulateList() //Listing is now alphabatized
 	else
 		RPG_Category.setValue("Select Category");
 	//Force the browser to have an introduction.
-	RPG_Text.readFromFile("Data/Game/Encyclopedia_Intro.des");
+	RPG_Text.readFromFile("data/encyclopedia/index.txt");
+
+	// Dealloc our parser
+	%parser.empty();
+	%parser.delete();
 }
 
 //------------------------------------------------------------------------------
@@ -290,7 +297,7 @@ function RPG_Category::onSelect(%this, %id, %text)
 	RPG_ItemList.clear();
 	RPG_Text.setValue("");
 	RPG_Category.selected = %id;
-	RPG_Text.readFromFile("Data/Game/" @ %text @ "/Introduction.des"); //Display the intro for the category we selected
+	RPG_Text.readFromFile("data/encyclopedia/" @ %text @ "/index.txt"); //Display the intro for the category we selected
 	RPG_BrowserPane.refresh();
 	if (RPG_ItemList.getSelectedID() == -1) //Does our button really need to be inactive?
 		RPG_DownloadButton.setActive(false); //YES!
@@ -305,7 +312,7 @@ function RPG_ItemList::onSelect(%this, %id, %text)
 	RPG_DownloadButton.setActive(true);
 	%category = RPG_Category.getvalue();
 	RPGBrowserGUI.selectedID[%category] = %id;
-	RPG_Text.readFromFile("Data/Game/" @ %category @ "/" @ %text @ ".des");
+	RPG_Text.readFromFile("data/encyclopedia/" @ %category @ "/" @ %text @ ".txt");
 }
 
 //------------------------------------------------------------------------------
@@ -328,7 +335,7 @@ function RPG_Text::readFromFile(%this,%file)
 	}
 	%fileobj.detach();
 }
- 
+
 //------------------------------------------------------------------------------
 
 RPG_DownloadButton.setActive(false); //Eh.. for some reason setting isActive in the GUI file isn't working
